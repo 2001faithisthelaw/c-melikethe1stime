@@ -1,0 +1,340 @@
+/* ═══════════════════════════════════════════
+   BASE — tokens y fuentes vienen de src/theme.css
+   ═══════════════════════════════════════════ */
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { margin: 0; padding: 0; min-height: 100%; height: 100%; }
+button { font: inherit; cursor: pointer; }
+img, video { max-width: 100%; display: block; }
+
+body {
+  font-family: var(--f-body);
+  color: var(--black);
+  background: var(--cold-white);
+  /* Y2K turbio — sin antialiasing salvo donde se necesite */
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  overflow: hidden;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+}
+
+.os {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--cold-white);
+}
+
+/* Scanlines CRT globales */
+.os::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.045) 0 1px,
+    transparent 1px 3px
+  );
+  mix-blend-mode: multiply;
+  z-index: 9998;
+}
+
+/* Vignette + grano turbio */
+.os::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 220px rgba(0,0,0,0.18);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='220' height='220' filter='url(%23n)' opacity='0.5'/></svg>");
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+  z-index: 9997;
+}
+
+/* Videos e imagenes turbias: pixeladas, un pelín desaturadas */
+video, img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+}
+.slot-media {
+  filter: contrast(1.08) saturate(0.88);
+}
+
+.os-main {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  bottom: 40px;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   Taskbar — Windows 7 dark glass
+   ═══════════════════════════════════════════ */
+.os-taskbar {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 40px;
+  display: flex; align-items: stretch;
+  background:
+    linear-gradient(180deg,
+      rgba(20,25,35,0.95) 0%,
+      rgba(8,12,20,0.98) 50%,
+      rgba(15,18,25,0.98) 100%);
+  color: #ffffff;
+  padding: 0;
+  gap: 0;
+  z-index: 10000;
+  font-family: var(--f-ui);
+  font-size: 12px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 -2px 6px rgba(0,0,0,0.35);
+}
+.os-start {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 14px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.os-start:hover {
+  background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%);
+}
+.os-flag {
+  display: inline-block;
+  width: 16px; height: 16px;
+  background:
+    radial-gradient(circle at 30% 30%,
+      #ffffff 0 3px,
+      #4e9be3 4px 8px,
+      #1c6da6 9px 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(78,155,227,0.4);
+}
+.os-tasks {
+  flex: 1;
+  display: flex; gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 3px 4px;
+}
+.os-tasks::-webkit-scrollbar { display: none; }
+.os-taskbtn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 3px;
+  color: #ffffff;
+  white-space: nowrap;
+  min-width: 130px;
+  text-align: left;
+  font-family: var(--f-ui);
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.os-taskbtn:hover {
+  background: linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%);
+  border-color: rgba(255,255,255,0.20);
+}
+.os-taskbtn.active {
+  background: linear-gradient(180deg, rgba(78,155,227,0.35) 0%, rgba(28,109,166,0.45) 100%);
+  border-color: rgba(78,155,227,0.6);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.20);
+}
+.os-taskbtn.min { opacity: 0.55; }
+.os-taskicon { flex: none; font-size: 14px; line-height: 1; opacity: 0.95; }
+.os-taskicon-img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  user-select: none;
+  -webkit-user-drag: none;
+  /* margen negativo — el icono se ve grande pero NO empuja la altura del taskbar */
+  margin: -6px 0;
+}
+.os-tasklabel { overflow: hidden; text-overflow: ellipsis; }
+
+.os-tray {
+  display: flex; align-items: center; gap: 14px;
+  padding: 0 14px;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.75);
+}
+.os-tray span { font-size: 13px; }
+.os-clock {
+  font-family: var(--f-ui);
+  color: #ffffff;
+  letter-spacing: 0;
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  /* Labels truncados por caracteres (10+ellipsis) via JS — CSS de respaldo */
+  .os-tasklabel {
+    display: inline-block;
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+  .os-taskbtn {
+    min-width: auto;
+    max-width: 130px;
+    padding: 0 8px;
+    gap: 5px;
+  }
+  .os-start b { display: none; }
+  .os-start { padding: 0 10px; }
+  .os-taskicon { font-size: 13px; }
+  .os-taskicon-img {
+    width: 26px;
+    height: 26px;
+    margin: -8px 0;
+  }
+  .os-taskbtn { min-height: 100%; }
+  .os-tray span { font-size: 13px; }
+  .os-tray { padding: 0 10px; gap: 8px; }
+}
+
+/* ═══════════════════════════════════════════
+   Utility patterns
+   ═══════════════════════════════════════════ */
+a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; font-family: var(--f-link); }
+a:visited { color: var(--link); }
+a:hover { color: var(--black); background: var(--cold-white); }
+
+.badge-live {
+  display: inline-block;
+  font-family: var(--f-link);
+  font-weight: 700;
+  background: var(--red);
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+}
+
+/* ═══════════════════════════════════════════
+   SCROLLBAR retro Windows XP — SIEMPRE visible
+   Se aplica a todas las áreas scrolleables dentro de las ventanas
+   ═══════════════════════════════════════════ */
+.win-frame > *,
+.msn-chat, .msn-log,
+.lw-results, .lw-body, .lw-preview,
+.mosaic-page,
+.ads-paper,
+.rpw-body {
+  scrollbar-width: auto;
+  scrollbar-color: #a0a0a0 var(--cold-white);
+}
+
+.win-frame > *::-webkit-scrollbar,
+.msn-chat::-webkit-scrollbar,
+.msn-log::-webkit-scrollbar,
+.lw-results::-webkit-scrollbar,
+.lw-body::-webkit-scrollbar,
+.mosaic-page::-webkit-scrollbar,
+.ads-paper::-webkit-scrollbar,
+.rpw-body::-webkit-scrollbar {
+  width: 16px;
+  -webkit-appearance: none;
+}
+
+.win-frame > *::-webkit-scrollbar-track,
+.msn-chat::-webkit-scrollbar-track,
+.msn-log::-webkit-scrollbar-track,
+.lw-results::-webkit-scrollbar-track,
+.lw-body::-webkit-scrollbar-track,
+.mosaic-page::-webkit-scrollbar-track,
+.ads-paper::-webkit-scrollbar-track,
+.rpw-body::-webkit-scrollbar-track {
+  background:
+    linear-gradient(90deg, #d4d0c8 0%, #ece9d8 50%, #d4d0c8 100%);
+  border-left: 1px solid #808080;
+  box-shadow: inset 1px 0 0 #ffffff;
+}
+
+.win-frame > *::-webkit-scrollbar-thumb,
+.msn-chat::-webkit-scrollbar-thumb,
+.msn-log::-webkit-scrollbar-thumb,
+.lw-results::-webkit-scrollbar-thumb,
+.lw-body::-webkit-scrollbar-thumb,
+.mosaic-page::-webkit-scrollbar-thumb,
+.ads-paper::-webkit-scrollbar-thumb,
+.rpw-body::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #ece9d8 45%, #d4d0c8 100%);
+  border: 1px solid #7a7a7a;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
+  min-height: 30px;
+}
+
+.win-frame > *::-webkit-scrollbar-thumb:hover,
+.msn-chat::-webkit-scrollbar-thumb:hover,
+.msn-log::-webkit-scrollbar-thumb:hover,
+.lw-results::-webkit-scrollbar-thumb:hover,
+.mosaic-page::-webkit-scrollbar-thumb:hover,
+.ads-paper::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #ece9d8 50%, #cfc9b8 100%);
+}
+
+.win-frame > *::-webkit-scrollbar-button,
+.msn-chat::-webkit-scrollbar-button,
+.msn-log::-webkit-scrollbar-button,
+.lw-results::-webkit-scrollbar-button,
+.mosaic-page::-webkit-scrollbar-button,
+.ads-paper::-webkit-scrollbar-button,
+.rpw-body::-webkit-scrollbar-button {
+  height: 16px; width: 16px;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #ece9d8 45%, #d4d0c8 100%);
+  border: 1px solid #7a7a7a;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
+  display: block;
+}
+
+/* Mobile: forzar overflow scroll para que la barrita se muestre
+   Y titlebars sticky arriba — nunca desaparecen al scrollear */
+@media (max-width: 640px) {
+  .win-frame > * {
+    overflow-y: scroll !important;
+    position: relative;
+  }
+  .win-frame .mosaic-titlebar,
+  .win-frame .msn-title,
+  .win-frame .lw-title,
+  .win-frame .ads-titlebar,
+  .win-frame .rpw-title {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    /* mantiene el fondo opaco para que el contenido no se vea a través */
+    background: var(--aero-titlebar-bg);
+  }
+  /* Ventanas maximizadas usan el mismo tratamiento */
+  .win-frame.maximized > * {
+    overflow-y: scroll !important;
+  }
+}

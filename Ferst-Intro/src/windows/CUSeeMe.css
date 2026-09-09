@@ -1,0 +1,945 @@
+.cuseeme-win {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--f-body);
+  border: 1px solid var(--aero-frame);
+  box-shadow: inset 0 0 0 1px var(--aero-frame-inner);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ── Titlebar Windows 7 Aero (dark) ── */
+.mosaic-titlebar {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--aero-titlebar-bg);
+  color: var(--aero-titlebar-text);
+  padding: 0 0 0 10px;
+  font-family: var(--f-ui);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+  flex: none;
+  border-bottom: 1px solid var(--aero-titlebar-border);
+  height: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.mosaic-titlebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--aero-titlebar-shine);
+  pointer-events: none;
+}
+.mosaic-title {
+  display: flex; align-items: center; gap: 6px;
+}
+.mosaic-title::before {
+  content: '';
+  display: inline-block;
+  width: 14px; height: 14px;
+  background:
+    radial-gradient(circle at 30% 30%, #ffb75e 0 3px, #ed8f3a 4px 8px, #c96a1a 9px 100%);
+  border-radius: 2px;
+  flex: none;
+}
+.mosaic-title { padding-left: 0; }
+.mosaic-controls {
+  display: flex;
+  align-items: flex-start;    /* pegados arriba, no centrados */
+  height: 28px;
+  padding: 0 5px 0 0;         /* solo padding derecha, ninguno arriba */
+  gap: 1px;
+  position: relative;
+  z-index: 1;
+}
+.mc {
+  width: 24px;
+  height: 19px;
+  padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--aero-tb-btn-bg);
+  color: #ffffff;
+  border: 1px solid var(--aero-btn-close-border);
+  border-top: none;                /* pegado al borde superior del titlebar */
+  font-family: var(--f-ui);
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 80ms;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
+  border-radius: 0 0 2px 2px;
+}
+.mc:hover { background: var(--aero-tb-btn-bg-hover); }
+.mc:active { background: var(--aero-tb-btn-bg-active); box-shadow: none; }
+.mc-close {
+  width: 32px;
+  background: var(--aero-btn-close-bg);
+  color: #ffffff;
+  border-radius: 0 0 2px 2px;
+  font-weight: 400;
+}
+.mc-close:hover { background: var(--aero-btn-close-bg-hover); color: #fff; }
+.mc-close:active { background: linear-gradient(180deg, #1c1c1c 0%, #2f2f2f 100%); }
+
+/* ── Menu Aero ── */
+.mosaic-menu {
+  display: flex; gap: 0;
+  background: var(--white);
+  padding: 0 4px;
+  border-bottom: 1px solid var(--aero-divider);
+  font-size: 12px;
+  position: relative;
+  flex: none;
+}
+.mm {
+  padding: 6px 10px;
+  color: var(--black);
+  font-family: var(--f-ui);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.mm u { text-decoration: underline; text-underline-offset: 2px; }
+.mm-clickable { cursor: pointer; user-select: none; position: relative; }
+.mm-clickable:hover,
+.mm-clickable.active {
+  background: linear-gradient(180deg, #cde5f5 0%, #9dcbea 100%);
+  color: var(--black);
+  border: 1px solid #6ba3d4;
+  padding: 5px 9px;
+}
+
+/* ── Dropdown Hotlists Aero ── */
+.mm-dropdown {
+  position: absolute;
+  top: 100%; left: 0;
+  min-width: 260px;
+  background: var(--white);
+  border: 1px solid var(--aero-titlebar-border);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.18);
+  border-radius: 0 0 4px 4px;
+  padding: 4px 0;
+  z-index: 1000;
+  color: var(--black);
+  font-size: 12px;
+  font-family: var(--f-ui);
+}
+.mm-drop-title {
+  font-size: 11px; padding: 4px 12px 2px;
+  color: var(--grey);
+  letter-spacing: 0;
+  text-transform: none;
+  font-style: italic;
+}
+.mm-drop-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.mm-drop-item:hover { background: linear-gradient(180deg, #cde5f5 0%, #9dcbea 100%); }
+.mm-drop-item.off { color: var(--grey); cursor: not-allowed; }
+.mm-drop-item.off:hover { background: transparent; }
+.mm-drop-item.quiet { color: var(--grey); font-size: 11px; padding: 4px 12px; }
+.mm-drop-item.quiet:hover { background: var(--cold-white); color: var(--black); }
+
+/* Menu items con shortcut a la derecha (View/Navigate/Tools) */
+.mm-drop-menuitem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 220px;
+  padding: 5px 14px;
+}
+.mm-drop-lbl { flex: 1; }
+.mm-drop-sc {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--grey);
+  margin-left: 20px;
+}
+.mm-drop-menuitem:hover .mm-drop-sc { color: var(--cold-white); }
+.mm-drop-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 22px;
+  color: var(--black);
+  overflow: visible;
+}
+.mm-drop-icon svg { display: block; width: 12px; height: 12px; }
+.mm-drop-icon img {
+  display: block;
+  width: 24px; height: 24px;
+  object-fit: contain;
+  margin: -4px 0;
+}
+.mm-drop-icon .mbm-png-lg {
+  width: 28px; height: 28px;
+  margin: -6px 0;
+}
+.mm-drop-sep {
+  height: 1px; background: var(--aero-divider); margin: 4px 0;
+}
+
+/* ── Toolbar Aero ── */
+.mosaic-toolbar {
+  display: flex; align-items: center; gap: 4px;
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--aero-divider);
+  background: var(--white);
+  flex: none;
+}
+.mtb-btn {
+  width: 28px; height: 26px;
+  background: var(--aero-btn-bg);
+  border: 1px solid var(--aero-btn-border);
+  border-radius: 3px;
+  color: var(--black);
+  font-family: var(--f-ui);
+  font-size: 12px;
+  padding: 0;
+  transition: background 80ms, border-color 80ms;
+}
+.mtb-btn:hover {
+  background: var(--aero-btn-bg-hover);
+  border-color: var(--aero-btn-border-hover);
+}
+.mtb-btn:active { background: var(--aero-btn-bg-active); }
+.mtb-sep {
+  width: 1px; height: 18px; background: var(--aero-divider);
+  margin: 0 4px;
+}
+.mtb-select {
+  height: 26px;
+  border: 1px solid var(--aero-input-border);
+  background: var(--aero-input-bg);
+  color: var(--black);
+  font-family: var(--f-ui);
+  font-size: 12px;
+  padding: 0 8px;
+  text-transform: none;
+  border-radius: 2px;
+}
+
+/* ── Address bar Aero ── */
+.mosaic-address {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--white);
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--aero-divider);
+  flex: none;
+}
+.ma-icon {
+  width: 22px; height: 26px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 13px; color: #ffb800;
+  flex: none;
+}
+.ma-input {
+  flex: 1;
+  height: 26px;
+  border: 1px solid var(--aero-input-border);
+  background: var(--aero-input-bg);
+  color: var(--black);
+  box-shadow: var(--aero-input-shadow);
+  padding: 0 10px;
+  font-family: var(--f-ui);
+  font-size: 12px;
+  min-width: 0;
+  letter-spacing: 0;
+  border-radius: 2px;
+}
+.ma-input:focus { outline: none; border-color: var(--aero-input-focus); box-shadow: 0 0 0 2px rgba(78,155,227,0.20); }
+
+/* ── Bookmarks · estilo footer Windows XP (Help · About · Home · Email) ── */
+.mosaic-bookmarks {
+  display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+  background:
+    linear-gradient(180deg, #f6f6f6 0%, #e6e6e6 50%, #cdcdcd 100%);
+  padding: 4px 14px;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #909090;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.05);
+  flex: none;
+  min-height: 26px;
+}
+.mbm-label {
+  display: none;                     /* oculto: no hay "links:" en la ref */
+}
+.mbm-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 0;
+  background: transparent;
+  border: none;
+  font-family: var(--f-ui);
+  font-size: 12px;
+  color: var(--black);
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-font-smoothing: none;
+  transition: color 60ms;
+}
+.mbm-btn:hover { color: var(--black); text-decoration: underline; }
+.mbm-btn:active { color: #666; }
+.mbm-btn {
+  line-height: 1;
+}
+.mbm-icon {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  font-size: 14px;
+  line-height: 0;   /* no reserva vertical extra por text baseline */
+  color: var(--black);
+  overflow: visible;
+}
+.mbm-icon svg { display: block; width: 14px; height: 14px; }
+.mbm-icon img,
+.mbm-png {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  user-select: none;
+  -webkit-user-drag: none;
+  /* Negative margin: el icono se ve grande pero NO empuja la altura del botón */
+  margin: -10px 0;
+}
+/* wacha.png (donde_estas?) — bien dominante */
+.mbm-png.mbm-png-lg {
+  width: 40px;
+  height: 40px;
+  margin: -14px 0;
+}
+.mbm-btn:hover .mbm-icon { color: var(--black); }
+
+/* ── Página ── */
+.mosaic-page {
+  background: var(--cold-white);
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+.cu-page-inner {
+  padding: 48px 24px 60px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+/* C-Me like the 1st time · Georgia italic bold + sombrita mínima detrás */
+.cu-logo {
+  font-family: var(--f-title);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--black);
+  font-size: clamp(46px, 7vw, 78px);
+  margin: 0;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  text-shadow: 4px 4px 0 rgba(13, 13, 13, 0.35);
+}
+/* Logo como imagen PNG · reemplaza al texto CSS cuando existe /logo.png */
+.cu-logo-img {
+  text-shadow: none;
+  padding: 0;
+  /* Márgenes negativos: absorbe el whitespace interno del PNG */
+  margin: -30px 0 -40px;
+  overflow: visible;
+}
+.cu-logo-img img {
+  display: block;
+  /* Escalado más grande que el contenedor → el texto se lee más grande */
+  width: 115%;
+  max-width: none;
+  height: auto;
+  margin: 0 auto;
+  /* Centra horizontalmente cuando excede el contenedor */
+  transform: translateX(-6.5%);
+  image-rendering: -webkit-optimize-contrast;
+}
+@media (max-width: 640px) {
+  .cu-logo-img {
+    margin: -18px 0 -24px;
+  }
+  .cu-logo-img img {
+    width: 108%;
+    transform: translateX(-3.7%);
+  }
+}
+.cu-lasttime {
+  font-family: var(--f-title);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--black);
+  font-size: 1em;
+  letter-spacing: -1.5px;
+}
+.cu-reg { display: none; }
+.cu-welcome {
+  color: var(--grey);
+  font-family: var(--f-title);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(14px, 1.6vw, 18px);
+  margin: 0 0 0;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+.cu-instr {
+  font-family: var(--f-pixel);
+  font-size: 10px;
+  color: var(--grey);
+  background: var(--white);
+  border: 1px dashed var(--black);
+  display: inline-block;
+  padding: 6px 10px;
+  margin: 0 0 32px;
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+}
+.cu-instr b { color: var(--black); font-weight: 700; }
+
+/* Player fijo inline en el home — con close button propio */
+.cu-inline-player {
+  position: relative;
+  max-width: 560px;
+  margin: -4px auto 24px;
+}
+.cu-inline-player-x {
+  position: absolute;
+  top: -8px; right: -8px;
+  z-index: 3;
+  width: 24px; height: 24px;
+  background: var(--aero-btn-close-bg);
+  color: #fff;
+  border: 1px solid var(--aero-btn-close-border);
+  border-radius: 50%;
+  font-family: var(--f-ui);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  padding: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.cu-inline-player-x:hover { background: var(--aero-btn-close-bg-hover); }
+.cu-inline-player-x:active { transform: scale(0.94); }
+
+/* Botón descarga MP3 — mismo estilo Aero, al lado izquierdo del × */
+.cu-inline-player-dl {
+  position: absolute;
+  top: -8px; right: 22px;
+  z-index: 3;
+  width: 24px; height: 24px;
+  background: var(--aero-btn-bg);
+  color: var(--black);
+  border: 1px solid var(--aero-btn-border);
+  border-radius: 50%;
+  font-family: var(--f-ui);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  display: flex; align-items: center; justify-content: center;
+}
+.cu-inline-player-dl:hover { background: var(--aero-btn-bg-hover); color: var(--black); }
+.cu-inline-player-dl:active { transform: scale(0.94); }
+.cu-inline-player-dl:visited { color: var(--black); }
+
+@media (max-width: 640px) {
+  .cu-inline-player { max-width: 100%; margin: -2px auto 18px; }
+  .cu-inline-player-x { width: 28px; height: 28px; font-size: 16px; }
+  .cu-inline-player-dl { width: 28px; height: 28px; font-size: 15px; right: 26px; }
+}
+
+/* ── Grid de feeds ── */
+.cu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .cu-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+/* Mobile — grid 2 columnas estilo YouTube (más opciones visibles) */
+@media (max-width: 640px) {
+  .cu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-width: 100%;
+    padding: 0 2px;
+  }
+}
+/* Phones muy chicos: 1 col para que se lea */
+@media (max-width: 360px) {
+  .cu-grid { grid-template-columns: 1fr; gap: 14px; }
+}
+
+.cu-feed {
+  margin: 0;
+  background: var(--white);
+  border: 1px solid var(--black);
+  box-shadow: 2px 2px 0 var(--black);
+  overflow: hidden;
+  transition: transform 60ms, box-shadow 60ms;
+}
+.cu-feed.clickable { cursor: pointer; }
+.cu-feed.clickable:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--black);
+}
+.cu-feed.clickable:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0 0 0 var(--black);
+}
+
+.cu-feed-bar {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--black);
+  color: var(--cold-white);
+  font-family: var(--f-pixel);
+  font-size: 10px;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--black);
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+}
+.cu-feed.is-blocked .cu-feed-bar {
+  background: var(--red);
+  color: #fff;
+  border-bottom-color: var(--red);
+}
+.cu-feed-icon {
+  width: 6px; height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  flex: none;
+}
+.cu-feed.is-blocked .cu-feed-icon { background: var(--red); }
+.cu-feed-name { flex: 1; font-weight: 500; letter-spacing: 0.2px; }
+.cu-feed-x { opacity: 0.5; font-family: var(--f-mono); }
+
+.cu-feed-body {
+  background: var(--black);
+  aspect-ratio: 4 / 3;
+  position: relative;
+}
+.cu-feed-body .slot {
+  border: none;
+  height: 100%;
+  aspect-ratio: auto;
+  /* El feed entero es clickable — el Slot NO intercepta pointer events */
+  pointer-events: none;
+  cursor: pointer;
+}
+.cu-feed-body .slot input[type="file"] { display: none; }
+
+/* Feed body del blocked — mantiene 4:3 como el resto del grid.
+   La imagen se recorta (object-fit: cover) para llenar sin bordes negros. */
+.cu-blocked {
+  position: absolute; inset: 0;
+  background: var(--black);
+  overflow: hidden;
+}
+/* Imagen fill total — sin bordes, cubre todo el tile */
+.cu-blocked-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: contrast(1.05) saturate(0.85);
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+@keyframes cu-flicker {
+  0%, 70% { opacity: 1; }
+  71%, 78% { opacity: 0.3; }
+  79%, 100% { opacity: 1; }
+}
+
+.cu-feed-meta {
+  padding: 8px 10px 4px;
+  background: var(--white);
+  border-top: 1px solid var(--grey-light);
+}
+/* Feed title · Verdana Bold (referencia: producto Silk Road "1g MDMA 82%+ High Quality") */
+.cu-feed-title {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--black);
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cu-feed-sub {
+  font-family: var(--f-body);
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--grey);
+  line-height: 1.35;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cu-feed-loc {
+  font-family: var(--f-body);
+  font-size: 10px;
+  color: var(--grey);
+  margin-top: 3px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Views · Kbps · fps → Georgia italic (referencia: números 2,066 en Silk Road) */
+.cu-feed-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  background: var(--white);
+  padding: 4px 10px 8px;
+  font-family: var(--f-num);
+  font-style: italic;
+  font-size: 11px;
+  color: var(--grey);
+  line-height: 1.2;
+}
+.cu-feed-views { color: var(--black); font-weight: 400; font-style: italic; }
+.cu-feed-stats { text-align: right; font-style: italic; }
+.cu-badges { display: flex; gap: 4px; align-items: center; }
+.cb {
+  display: inline-block;
+  width: 12px; height: 12px;
+  background: transparent;
+  border: 1px solid var(--grey-light);
+  text-align: center;
+  line-height: 10px;
+  font-size: 8px;
+  color: var(--grey);
+  border-radius: 2px;
+}
+.cb-num {
+  background: var(--red); color: #ffffff;
+  padding: 0 6px; border: none;
+  font-weight: 700;
+  font-family: var(--f-link);
+  border-radius: 3px;
+}
+.cu-stats { display: flex; gap: 10px; }
+
+/* ── Shortcuts ── */
+.cu-shortcuts {
+  margin: 44px auto 0;
+  max-width: 720px;
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--grey-light);
+  border-radius: 8px;
+  text-align: center;
+}
+/* section header estilo "Video Information" · Tahoma Bold pixel-crisp */
+.cu-shortcuts-h {
+  font-family: var(--f-ui);
+  font-weight: 700;
+  color: var(--black);
+  font-size: 13px;
+  margin: 0 0 6px;
+  letter-spacing: 0;
+  -webkit-font-smoothing: none;
+  text-transform: none;
+  border-bottom: 1px solid var(--aero-divider);
+  padding-bottom: 4px;
+  display: inline-block;
+}
+.cu-shortcuts-sub {
+  font-family: var(--f-body);
+  color: var(--grey);
+  font-size: 13px;
+  margin: 0 0 20px;
+}
+.cu-shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 560px) {
+  .cu-shortcuts-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.cu-shortcut {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 16px 10px;
+  background: var(--cold-white);
+  border: 1px solid var(--grey-light);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--black);
+  cursor: pointer;
+  font-family: var(--f-body);
+}
+.cu-shortcut:hover {
+  background: var(--white);
+  border-color: var(--black);
+}
+.cu-shortcut-icon {
+  font-size: 24px; line-height: 1;
+  color: var(--black);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.cu-shortcut-icon svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+.cu-shortcut-icon img {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.cu-shortcut-icon .mbm-png-lg {
+  width: 68px;
+  height: 68px;
+}
+.cu-shortcut-lbl {
+  font-family: var(--f-link);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cu-shortcut-url {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  color: var(--grey);
+  word-break: break-all;
+}
+
+.cu-caption {
+  margin: 40px 0 6px;
+  font-family: var(--f-body);
+  letter-spacing: 1px;
+  font-size: 10px;
+  color: var(--grey);
+  text-transform: uppercase;
+}
+/* Marca de agua — visible pero decorativa */
+.cu-watermark {
+  opacity: 0.6;
+  font-size: 9px;
+  letter-spacing: 2px;
+  user-select: none;
+  pointer-events: none;
+  font-style: italic;
+}
+.cu-uni {
+  margin: 0;
+  font-family: var(--f-serif);
+  font-style: italic;
+  letter-spacing: 1.5px;
+  font-size: 13px;
+  color: var(--black);
+  line-height: 1.2;
+}
+.cu-broughtby {
+  margin: 14px 0 0;
+  font-family: var(--f-mono);
+  font-style: normal;
+  font-size: 11px;
+  color: var(--grey);
+  letter-spacing: 0.2px;
+}
+.cu-broughtby a {
+  font-family: var(--f-mono);
+  color: var(--black);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cu-broughtby a:hover { color: var(--link); background: transparent; }
+
+/* ═══════════════════════════════════════════
+   MOBILE — chrome minimal, contenido protagonista
+   ═══════════════════════════════════════════ */
+@media (max-width: 640px) {
+  /* Chrome del "navegador" reducido a lo esencial */
+  .mosaic-menu { display: none; }
+  .mosaic-toolbar { display: none; }
+
+  /* Address bar minimalista */
+  .mosaic-address {
+    padding: 6px 8px;
+  }
+  .ma-icon { display: none; }
+  .ma-input { font-size: 12px; height: 26px; }
+
+  /* Bookmarks: scroll horizontal, sin label */
+  .mosaic-bookmarks {
+    padding: 6px 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+  }
+  .mosaic-bookmarks::-webkit-scrollbar { display: none; }
+  .mbm-label { display: none; }
+  .mbm-btn {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    font-size: 13px;
+    gap: 7px;
+  }
+  .mbm-icon img,
+  .mbm-png {
+    width: 34px;
+    height: 34px;
+    margin: -11px 0;
+  }
+  .mbm-png.mbm-png-lg {
+    width: 42px;
+    height: 42px;
+    margin: -15px 0;
+  }
+
+  /* Hero más compacto — deja que las cards asomen antes del fold */
+  .cu-page-inner {
+    padding: 18px 14px 32px;
+    max-width: 100%;
+  }
+  .cu-logo {
+    font-size: clamp(30px, 10vw, 42px);
+    letter-spacing: -0.5px;
+    text-shadow: 2px 2px 0 rgba(13, 13, 13, 0.25);
+  }
+  .cu-welcome {
+    font-size: 13px;
+    margin: 0;
+  }
+  /* Instrucción "clic en cualquier..." queda implícita por el grid tipo YouTube */
+  .cu-instr { display: none; }
+
+  /* Shortcuts al final del home ya duplican la barra de bookmarks de arriba */
+  .cu-shortcuts { display: none; }
+
+  /* Cards mobile compactas · estilo YouTube grid 2 cols */
+  .cu-feed {
+    box-shadow: 2px 2px 0 var(--black);
+  }
+  .cu-feed-bar {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+  .cu-feed-meta {
+    padding: 8px 8px 4px;
+  }
+  .cu-feed-title {
+    font-size: 12px;
+    line-height: 1.25;
+    /* Permitir 2 líneas máximo para títulos largos */
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: initial;
+  }
+  .cu-feed-sub {
+    font-size: 10px;
+    line-height: 1.3;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: initial;
+  }
+  .cu-feed-loc {
+    font-size: 9px;
+    margin-top: 3px;
+  }
+  .cu-feed-foot {
+    padding: 4px 8px 8px;
+    font-size: 9px;
+    gap: 4px;
+  }
+  .cu-feed-stats { display: none; }  /* Ocultamos fps/kbps en cards chicas */
+
+  /* usuario_bloqueado — el que no responde — refuerzo visual */
+  .cu-feed.is-blocked {
+    box-shadow: 3px 3px 0 var(--red);
+  }
+  /* Shortcuts en 2 columnas apretadas */
+  .cu-shortcuts {
+    margin: 32px auto 0;
+    padding: 18px 16px;
+  }
+  .cu-shortcuts-h { font-size: 17px; }
+  .cu-shortcuts-sub { font-size: 12px; margin-bottom: 14px; }
+  .cu-shortcuts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .cu-shortcut { padding: 12px 8px; }
+  .cu-shortcut-icon { font-size: 22px; }
+  .cu-shortcut-lbl { font-size: 12px; }
+  .cu-shortcut-url { font-size: 9px; }
+
+  /* Status bar oculta — ocupa espacio sin dar info útil en mobile */
+  .mosaic-status { display: none; }
+}
+
+/* Phones muy chicos */
+@media (max-width: 380px) {
+  .cu-logo { font-size: 42px; letter-spacing: -0.5px; }
+  .cu-page-inner { padding: 20px 12px 32px; }
+  .cu-feed-title { font-size: 15px; }
+}
+
+/* ── Status bar Aero (footer) ── */
+.mosaic-status {
+  display: flex; gap: 4px; align-items: center;
+  background: var(--aero-footer-bg);
+  border-top: 1px solid var(--aero-titlebar-border);
+  padding: 4px 10px;
+  flex: none;
+  min-height: 26px;
+}
+.ms-tab {
+  padding: 3px 12px;
+  background: transparent;
+  border: none;
+  font-family: var(--f-ui);
+  font-size: 12px;
+  color: var(--black);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.ms-fill {
+  flex: 1;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 3px 10px;
+  font-family: var(--f-ui);
+  font-size: 12px;
+  color: var(--grey);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.4;
+  font-style: italic;
+}
