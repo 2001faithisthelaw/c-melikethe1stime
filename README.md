@@ -4,4 +4,4 @@
 - **Federica Geriboni** ([@faithisthelawfaithunderwill](https://www.instagram.com/faithisthelawfaithunderwill/)) — Creative Direction & Development
 ## Live Demo
 
-https://ferst-intro.vercel.app
+ferst-intro.vercel.app
