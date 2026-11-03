@@ -1,121 +1,145 @@
+<div align="center">
+
 # C-Me — like the 1st time
 
-**[English](#english) · [Español](#español)**
+*An interactive launch site for Illuno's debut album · Un sitio interactivo de lanzamiento del disco debut de Illuno*
 
-**Live / En vivo:** https://2001faithisthelaw.github.io/c-melikethe1stime/
+**[🇬🇧 English](#-english) · [🇦🇷 Español](#-español) · [▶ Live / En vivo](https://2001faithisthelaw.github.io/c-melikethe1stime/)**
+
+![Entry dialog](docs/intro.jpg)
+
+</div>
 
 ---
 
-## English
+## 🇬🇧 English
 
-Interactive launch site for **Illuno's** debut album. It simulates an early-2000s desktop where every window orbits the same absence. The main app, **C-Me**, is a fictional webcam service with nine live feeds, each one a phase of the same obsession.
+### About
 
-### What's in it
+**C-Me — like the 1st time** is a website built as an experience instead of a promo page. It simulates an early-2000s desktop in which every window orbits the same absence. The main app, **C-Me**, is a fictional webcam service with nine feeds, each one a phase of the same obsession. From there you open chats, a file-search window, a voice-note player with the album's tracks and a classifieds page.
 
-- **Entry dialog.** The site opens with a confirmation box with three buttons that all say NO. Every one of them takes you straight into the site.
-- **C-Me (home).** A grid of nine "transmissions": eight videos and one refused connection. The videos are graded pale and washed out, pixelated, with the face covered by irregular blocks that follow it frame by frame.
-- **MSN chats.** Click a feed and a chat with that character opens. Each has its own conversation, and `@mentions` inside the logs open other chats.
-- **donde_estas?** A fake file-search window (a nod to LimeWire). Each file belongs to a character; double-click opens their chat.
-- **Deleted voice notes.** A player with the album's tracks.
-- **El Anuncio.** A classifieds page.
-- **Address bar.** Typing keywords such as `msn`, `busca`, `mp3` or `anuncio` opens the matching window.
-- **Blocked user.** Their tile and their cam show a single image, *f(x)*, and the cam carries one hyperlink, "we will eventually find each other". Every other empty-signal box carries that same hyperlink over blurred photos that change block by block.
+I handled the whole chain: concept, writing, UX/UI design, front-end development and deployment, with Claude Code as a development tool and every output reviewed by hand. Reference: the 2001 *Donnie Darko* website.
 
-Nothing is locked: everything is reachable from the start by following the cross-references between characters and files.
+<p align="center"><img src="docs/home.jpg" alt="Home" width="48%"> <img src="docs/chat.jpg" alt="Chat" width="48%"></p>
 
-### Stack
+### How to explore it
 
-React 18 + Vite. No runtime dependencies beyond React. Everything runs client-side.
+Nothing is locked. You move through the site by following the links between characters and files:
 
-### Run locally
+1. **Entry dialog.** The site opens with a confirmation box and three buttons that all say **NO**. Any of them takes you in.
+2. **Feeds.** Click one of the nine transmissions to open a chat with that character. Each chat has its own conversation.
+3. **Mentions.** `@names` inside the chats open the other characters' conversations.
+4. **donde_estas?** A fake file-search window. Every file belongs to a character; double-click opens their chat.
+5. **Address bar.** Type a word such as `msn`, `busca`, `mp3` or `anuncio` and press Enter to open the matching window.
+6. **Menus.** *Tools → Ver código fuente* (`Ctrl+U`) and *Herramientas de desarrollador* (`F12`) show narrative debug text, and *View → Mostrar bloqueados* counts how many times you tried to write to the blocked user.
+7. **The blocked user.** Their tile and their camera show *f(x)*, and their camera carries one hyperlink: *"we will eventually find each other"*. Their chat never lets you send a message.
+
+### The look
+
+- Videos are graded pale and washed out, pixelated, with the face covered by irregular blocks that follow it frame by frame. The script that does it is in [`Ferst-Intro/tools`](Ferst-Intro/tools).
+- Soft serif typography, thin borders, flat colors, no gradients.
+- Empty-signal boxes carry a single hyperlink over blurred photos that change block by block.
+
+### Tech
+
+React 18 and Vite. No runtime dependencies beyond React. Everything runs in the browser.
+
+### Run it locally
 
 ```bash
 cd Ferst-Intro
 npm install
-npm run dev        # http://localhost:5173
+npm run dev          # http://localhost:5173
 ```
 
 ```bash
-npm run build      # outputs Ferst-Intro/dist
-npm run preview    # serves the build
+npm run build        # outputs Ferst-Intro/dist
+npm run preview      # serves the build
 ```
 
-### Deploy (GitHub Pages)
+### Publish it (GitHub Pages)
 
-The workflow in `.github/workflows/pages.yml` builds and publishes the site on every push to `main`.
+The workflow in [`.github/workflows/pages.yml`](.github/workflows/pages.yml) builds and publishes the site on every push to `main`.
 
 1. Merge your branch into `main`.
-2. In the repo go to **Settings → Pages** and set **Source** to **GitHub Actions** (one time only).
-3. Wait for the **Actions** run to finish. The link is the one at the top of this file.
+2. Go to **Settings → Pages** and set **Source** to **GitHub Actions** (once).
+3. Wait for the run in **Actions** to finish. The site lives at <https://2001faithisthelaw.github.io/c-melikethe1stime/>.
 
-### Regenerating the videos
+### Regenerate the videos
 
-The videos in `Ferst-Intro/public/` are processed from the originals in `Ferst-Intro/media-src/` (not served by the site).
+The videos in `Ferst-Intro/public/` are processed from the originals in `Ferst-Intro/media-src/`, which the site does not serve.
 
 ```bash
-pip install opencv-python-headless numpy   # also needs ffmpeg installed
+pip install opencv-python-headless numpy     # ffmpeg must also be installed
 python3 Ferst-Intro/tools/heavencore.py
 ```
 
-Grade, pixelation and face blocks are tuned inside `tools/heavencore.py`.
+Color, pixelation and face blocks are tuned inside `tools/heavencore.py`.
 
 ### Credits
 
 - **Illuno** ([@1l_uno](https://www.instagram.com/1l_uno/)) — Music
 - **Federica Geriboni** ([@faithisthelawfaithunderwill](https://www.instagram.com/faithisthelawfaithunderwill/)) — Creative Direction & Development
 
-Reference: the 2001 *Donnie Darko* website.
-
 ---
 
-## Español
+## 🇦🇷 Español
 
-Sitio interactivo de lanzamiento del disco debut de **Illuno**. Simula un escritorio de principios de los 2000 donde cada ventana orbita la misma ausencia. La app principal, **C-Me**, es un servicio ficticio de webcams con nueve transmisiones, cada una una fase de la misma obsesión.
+### Sobre el proyecto
 
-### Qué tiene
+**C-Me — like the 1st time** es un sitio pensado como una experiencia y no como una página promocional. Simula un escritorio de principios de los 2000 en el que cada ventana orbita la misma ausencia. La app principal, **C-Me**, es un servicio ficticio de webcams con nueve transmisiones, cada una una fase de la misma obsesión. Desde ahí se abren chats, una ventana de búsqueda de archivos, un reproductor de notas de voz con los temas del disco y una página de clasificados.
 
-- **Diálogo de entrada.** El sitio abre con una caja de confirmación con tres botones que dicen NO. Los tres te llevan directo al sitio.
-- **C-Me (home).** Una grilla de nueve "transmisiones": ocho videos y una conexión rechazada. Los videos tienen un color pálido y lavado, pixelado, con la cara cubierta por bloques irregulares que la siguen cuadro a cuadro.
-- **Chats de MSN.** Al hacer clic en una transmisión se abre el chat con ese personaje. Cada uno tiene su conversación, y las `@menciones` abren otros chats.
-- **donde_estas?** Una ventana falsa de búsqueda de archivos (guiño a LimeWire). Cada archivo es de un personaje; con doble clic se abre su chat.
-- **Notas de voz eliminadas.** Un reproductor con los temas del disco.
-- **El Anuncio.** Una página de clasificados.
-- **Barra de direcciones.** Escribir palabras como `msn`, `busca`, `mp3` o `anuncio` abre la ventana correspondiente.
-- **Usuario bloqueado.** Su tarjeta y su cámara muestran una sola imagen, *f(x)*, y la cámara lleva un hipervínculo, "we will eventually find each other". Los demás recuadros sin señal llevan ese mismo hipervínculo sobre fotos desenfocadas que cambian de bloque en bloque.
+Me ocupé de toda la cadena: concepto, escritura, diseño UX/UI, desarrollo front-end y publicación, con Claude Code como herramienta de desarrollo y cada resultado revisado a mano. Referencia: el sitio web de *Donnie Darko* (2001).
 
-Nada está bloqueado: todo se alcanza desde el principio siguiendo las referencias cruzadas entre personajes y archivos.
+### Cómo explorarlo
+
+Nada está bloqueado. Se avanza siguiendo los vínculos entre personajes y archivos:
+
+1. **Diálogo de entrada.** El sitio abre con una caja de confirmación y tres botones que dicen **NO**. Cualquiera de los tres te deja entrar.
+2. **Transmisiones.** Al hacer clic en una de las nueve se abre un chat con ese personaje. Cada chat tiene su propia conversación.
+3. **Menciones.** Los `@nombres` dentro de los chats abren las conversaciones de los otros personajes.
+4. **donde_estas?** Una ventana falsa de búsqueda de archivos. Cada archivo es de un personaje; con doble clic se abre su chat.
+5. **Barra de direcciones.** Escribí una palabra como `msn`, `busca`, `mp3` o `anuncio` y apretá Enter para abrir la ventana correspondiente.
+6. **Menús.** *Tools → Ver código fuente* (`Ctrl+U`) y *Herramientas de desarrollador* (`F12`) muestran texto de depuración narrativo, y *View → Mostrar bloqueados* cuenta cuántas veces intentaste escribirle al usuario bloqueado.
+7. **El usuario bloqueado.** Su tarjeta y su cámara muestran *f(x)*, y su cámara lleva un hipervínculo: *"we will eventually find each other"*. Su chat nunca te deja enviar un mensaje.
+
+### La estética
+
+- Los videos tienen un color pálido y lavado, pixelado, con la cara cubierta por bloques irregulares que la siguen cuadro a cuadro. El script que lo hace está en [`Ferst-Intro/tools`](Ferst-Intro/tools).
+- Tipografía serif suave, bordes finos, colores planos y sin degradados.
+- Los recuadros sin señal llevan un solo hipervínculo sobre fotos desenfocadas que cambian de bloque en bloque.
 
 ### Tecnología
 
-React 18 + Vite. Sin dependencias de runtime aparte de React. Todo corre en el cliente.
+React 18 y Vite. Sin dependencias de runtime aparte de React. Todo corre en el navegador.
 
-### Correr en local
+### Correrlo en local
 
 ```bash
 cd Ferst-Intro
 npm install
-npm run dev        # http://localhost:5173
+npm run dev          # http://localhost:5173
 ```
 
 ```bash
-npm run build      # genera Ferst-Intro/dist
-npm run preview    # sirve el build
+npm run build        # genera Ferst-Intro/dist
+npm run preview      # sirve el build
 ```
 
-### Publicar (GitHub Pages)
+### Publicarlo (GitHub Pages)
 
-El workflow de `.github/workflows/pages.yml` arma y publica el sitio en cada push a `main`.
+El workflow de [`.github/workflows/pages.yml`](.github/workflows/pages.yml) arma y publica el sitio en cada push a `main`.
 
 1. Uní tu rama a `main`.
-2. En el repo andá a **Settings → Pages** y en **Source** elegí **GitHub Actions** (una sola vez).
-3. Esperá a que termine la corrida en **Actions**. El link es el de arriba de este archivo.
+2. Andá a **Settings → Pages** y en **Source** elegí **GitHub Actions** (una sola vez).
+3. Esperá a que termine la corrida en **Actions**. El sitio queda en <https://2001faithisthelaw.github.io/c-melikethe1stime/>.
 
 ### Regenerar los videos
 
-Los videos de `Ferst-Intro/public/` se procesan a partir de los originales de `Ferst-Intro/media-src/` (que el sitio no sirve).
+Los videos de `Ferst-Intro/public/` se procesan a partir de los originales de `Ferst-Intro/media-src/`, que el sitio no sirve.
 
 ```bash
-pip install opencv-python-headless numpy   # también hace falta ffmpeg
+pip install opencv-python-headless numpy     # también hace falta ffmpeg
 python3 Ferst-Intro/tools/heavencore.py
 ```
 
@@ -125,5 +149,3 @@ El color, el pixelado y los bloques de la cara se ajustan dentro de `tools/heave
 
 - **Illuno** ([@1l_uno](https://www.instagram.com/1l_uno/)) — Música
 - **Federica Geriboni** ([@faithisthelawfaithunderwill](https://www.instagram.com/faithisthelawfaithunderwill/)) — Dirección creativa y desarrollo
-
-Referencia: el sitio web de *Donnie Darko* (2001).
