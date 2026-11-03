@@ -1,0 +1,5 @@
+{
+  "installCommand": "cd Ferst-Intro && npm ci",
+  "buildCommand": "cd Ferst-Intro && npm run build",
+  "outputDirectory": "Ferst-Intro/dist"
+}

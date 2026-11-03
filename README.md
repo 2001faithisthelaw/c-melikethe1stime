@@ -65,6 +65,15 @@ The workflow in [`.github/workflows/pages.yml`](.github/workflows/pages.yml) bui
 2. Go to **Settings → Pages** and set **Source** to **GitHub Actions** (once).
 3. Wait for the run in **Actions** to finish. The site lives at <https://2001faithisthelaw.github.io/c-melikethe1stime/>.
 
+### Publish it (Vercel)
+
+The repo includes a root [`vercel.json`](vercel.json), so it imports as is.
+
+1. On [vercel.com](https://vercel.com) choose **Add New… → Project** and import this repository.
+2. Leave everything as it is and press **Deploy**. Vercel gives you a public `*.vercel.app` link.
+
+From the terminal, with the built site: `cd Ferst-Intro && npm run build && cd dist && npx vercel --prod`.
+
 ### Regenerate the videos
 
 The videos in `Ferst-Intro/public/` are processed from the originals in `Ferst-Intro/media-src/`, which the site does not serve.
@@ -133,6 +142,15 @@ El workflow de [`.github/workflows/pages.yml`](.github/workflows/pages.yml) arma
 1. Uní tu rama a `main`.
 2. Andá a **Settings → Pages** y en **Source** elegí **GitHub Actions** (una sola vez).
 3. Esperá a que termine la corrida en **Actions**. El sitio queda en <https://2001faithisthelaw.github.io/c-melikethe1stime/>.
+
+### Publicarlo (Vercel)
+
+El repo trae un [`vercel.json`](vercel.json) en la raíz, así que se importa tal cual.
+
+1. En [vercel.com](https://vercel.com) elegí **Add New… → Project** e importá este repositorio.
+2. Dejá todo como está y tocá **Deploy**. Vercel te da un link público `*.vercel.app`.
+
+Desde la terminal, con el sitio ya armado: `cd Ferst-Intro && npm run build && cd dist && npx vercel --prod`.
 
 ### Regenerar los videos
 
