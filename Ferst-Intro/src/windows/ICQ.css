@@ -11,7 +11,7 @@
 
 .icq-title {
   display: flex; align-items: center; gap: 6px;
-  background: linear-gradient(180deg, #6ba53e 0%, #3d6b2f 100%);
+  background: #6ba53e;
   color: #fff;
   padding: 3px 6px;
   font-weight: 700;
@@ -46,7 +46,7 @@
 
 /* Sidebar */
 .icq-side {
-  background: linear-gradient(180deg, #d9e8c6, #b7ce9a);
+  background: #d9e8c6;
   padding: 10px;
   border-right: 2px solid #3d6b2f;
   display: flex; flex-direction: column; gap: 10px;
@@ -96,7 +96,7 @@
 }
 .icq-tabs {
   display: flex;
-  background: linear-gradient(180deg, #d9e8c6, #b7ce9a);
+  background: #d9e8c6;
   border-bottom: 2px solid #3d6b2f;
 }
 .icq-tab {
@@ -175,7 +175,7 @@
   resize: none;
 }
 .icq-compose button {
-  background: linear-gradient(180deg, #a8d179, #6ba53e);
+  background: #a8d179;
   border: 1px solid #1a3011;
   color: #fff;
   font-weight: 700;

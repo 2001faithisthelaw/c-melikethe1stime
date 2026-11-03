@@ -58,9 +58,9 @@
   font-weight: 700;
   font-style: italic;
 }
-.mdlg-icon-info    { background: linear-gradient(180deg, #4e9be3 0%, #1c6da6 100%); }
-.mdlg-icon-warning { background: linear-gradient(180deg, #ffcc4e 0%, #b28a1a 100%); color: #000; }
-.mdlg-icon-error   { background: linear-gradient(180deg, #e05656 0%, #a01a1a 100%); }
+.mdlg-icon-info    { background: #4e9be3; }
+.mdlg-icon-warning { background: #ffcc4e; color: #000; }
+.mdlg-icon-error   { background: #e05656; }
 
 .mdlg-content { flex: 1; min-width: 0; }
 .mdlg-msg {

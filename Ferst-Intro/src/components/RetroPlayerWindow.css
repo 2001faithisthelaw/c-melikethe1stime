@@ -38,7 +38,7 @@
 .rpw-t-icon {
   width: 14px; height: 14px;
   background:
-    radial-gradient(circle at 30% 30%, #ffb75e 0 3px, #ed8f3a 4px 8px, #c96a1a 9px 100%);
+    #ed8f3a;
   border-radius: 50%;
   flex: none;
 }

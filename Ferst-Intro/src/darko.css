@@ -82,7 +82,7 @@
 
 /* ─── ventanas: barra casi negra sin brillo, sombra más difusa ─── */
 [data-theme="silkroad"] {
-  --aero-titlebar-bg: linear-gradient(180deg, #202026 0%, #121216 100%);
+  --aero-titlebar-bg: #202026;
   --aero-titlebar-shine: none;
   --aero-window-shadow: 0 10px 34px rgba(20,20,40,.22);
   --aero-divider: #e4e4ea;

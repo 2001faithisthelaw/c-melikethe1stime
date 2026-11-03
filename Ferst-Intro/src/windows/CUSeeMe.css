@@ -44,7 +44,7 @@
   display: inline-block;
   width: 14px; height: 14px;
   background:
-    radial-gradient(circle at 30% 30%, #ffb75e 0 3px, #ed8f3a 4px 8px, #c96a1a 9px 100%);
+    #ed8f3a;
   border-radius: 2px;
   flex: none;
 }
@@ -85,7 +85,7 @@
   font-weight: 400;
 }
 .mc-close:hover { background: var(--aero-btn-close-bg-hover); color: #fff; }
-.mc-close:active { background: linear-gradient(180deg, #1c1c1c 0%, #2f2f2f 100%); }
+.mc-close:active { background: #1c1c1c; }
 
 /* ── Menu Aero ── */
 .mosaic-menu {
@@ -109,7 +109,7 @@
 .mm-clickable { cursor: pointer; user-select: none; position: relative; }
 .mm-clickable:hover,
 .mm-clickable.active {
-  background: linear-gradient(180deg, #cde5f5 0%, #9dcbea 100%);
+  background: #cde5f5;
   color: var(--black);
   border: 1px solid #6ba3d4;
   padding: 5px 9px;
@@ -142,7 +142,7 @@
   padding: 6px 12px;
   cursor: pointer;
 }
-.mm-drop-item:hover { background: linear-gradient(180deg, #cde5f5 0%, #9dcbea 100%); }
+.mm-drop-item:hover { background: #cde5f5; }
 .mm-drop-item.off { color: var(--grey); cursor: not-allowed; }
 .mm-drop-item.off:hover { background: transparent; }
 .mm-drop-item.quiet { color: var(--grey); font-size: 11px; padding: 4px 12px; }
@@ -261,7 +261,7 @@
 .mosaic-bookmarks {
   display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
   background:
-    linear-gradient(180deg, #f6f6f6 0%, #e6e6e6 50%, #cdcdcd 100%);
+    #e6e6e6;
   padding: 4px 14px;
   border-top: 1px solid #ffffff;
   border-bottom: 1px solid #909090;

@@ -2,7 +2,7 @@
   position: fixed; inset: 0; z-index: 20000;
   display: flex; align-items: center; justify-content: center;
   padding: 16px;
-  background: radial-gradient(ellipse at center, #14141b 0%, #08080c 70%, #040406 100%);
+  background: #08080c;
   color: #d6d6dd;
   font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 11px;
   transition: opacity .9s ease;
@@ -30,7 +30,7 @@
 @keyframes intro-shake { 25% { transform: translate(-5px,1px); } 50% { transform: translate(5px,-1px); } 75% { transform: translate(-3px,0); } }
 .intro-bar {
   display: flex; justify-content: space-between; align-items: center;
-  background: linear-gradient(180deg, #202026, #121216); color: #e6e6ee;
+  background: #202026; color: #e6e6ee;
   padding: 0 6px 0 10px; height: 24px; font-size: 11px;
 }
 .intro-x { opacity: .55; font-size: 14px; }

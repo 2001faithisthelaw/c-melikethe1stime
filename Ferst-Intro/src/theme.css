@@ -55,47 +55,47 @@
 
   /* Titlebar gradient bien oscuro (referencia Video to GIF Converter) */
   --aero-titlebar-bg:
-    linear-gradient(180deg, #1a1a1a 0%, #050505 50%, #101010 100%);
+    #050505;
   --aero-titlebar-border: #000000;
   --aero-titlebar-text:   #ffffff;
   --aero-titlebar-shine:
-    linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 60%);
+    rgba(255,255,255,0.08);
 
   /* Buttons min/max en el titlebar (dark, apenas más claros para leer) */
   --aero-tb-btn-bg:
-    linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 50%, #080808 100%);
+    #1a1a1a;
   --aero-tb-btn-bg-hover:
-    linear-gradient(180deg, #3a3a3a 0%, #262626 50%, #141414 100%);
+    #262626;
   --aero-tb-btn-bg-active:
-    linear-gradient(180deg, #080808 0%, #1a1a1a 100%);
+    #080808;
 
   /* Botón cerrar — mismo dark que min/max */
   --aero-btn-close-bg:
-    linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 50%, #080808 100%);
+    #1a1a1a;
   --aero-btn-close-bg-hover:
-    linear-gradient(180deg, #c73333 0%, #a01a1a 50%, #7a1010 100%);
+    #a01a1a;
   --aero-btn-close-border: #000000;
 
   /* Bottom bar (mismo dark que titlebar) */
   --aero-footer-bg:
-    linear-gradient(180deg, #101010 0%, #050505 50%, #1a1a1a 100%);
+    #050505;
 
   /* Botón Aero azul (Load Video, Next) */
   --aero-btn-blue-bg:
-    linear-gradient(180deg, #5aabdb 0%, #3389c6 50%, #1c6da6 100%);
+    #3389c6;
   --aero-btn-blue-bg-hover:
-    linear-gradient(180deg, #7bbfe4 0%, #4499d0 50%, #2977b3 100%);
+    #4499d0;
   --aero-btn-blue-bg-active:
-    linear-gradient(180deg, #1c6da6 0%, #3389c6 50%, #5aabdb 100%);
+    #3389c6;
   --aero-btn-blue-border: #1c548a;
 
   /* Botón neutral (min / max / general) */
   --aero-btn-bg:
-    linear-gradient(180deg, #ffffff 0%, #f0f0f0 50%, #d8d8d8 100%);
+    #f0f0f0;
   --aero-btn-bg-hover:
-    linear-gradient(180deg, #ffffff 0%, #e5f3fd 50%, #b8dbf5 100%);
+    #e5f3fd;
   --aero-btn-bg-active:
-    linear-gradient(180deg, #c8c8c8 0%, #dadada 100%);
+    #c8c8c8;
   --aero-btn-border: #a0a0a0;
   --aero-btn-border-hover: #5f9fd2;
 

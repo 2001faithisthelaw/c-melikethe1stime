@@ -17,9 +17,7 @@ function drawCaptcha(cv, seed) {
   const off = document.createElement('canvas'); off.width = W; off.height = H
   const o = off.getContext('2d')
   // fondo sucio, gris azulado
-  const bg = o.createLinearGradient(0, 0, W, H)
-  bg.addColorStop(0, '#cdced5'); bg.addColorStop(1, '#b4b5bf')
-  o.fillStyle = bg; o.fillRect(0, 0, W, H)
+  o.fillStyle = '#c1c2ca'; o.fillRect(0, 0, W, H)
   for (let i = 0; i < 1100; i++) {
     const v = 140 + r() * 90 | 0
     o.fillStyle = `rgba(${v},${v},${v + 8},.4)`
@@ -54,10 +52,7 @@ function drawCaptcha(cv, seed) {
     if (r() < .07) dx += (r() - .5) * 20
     g.drawImage(off, 0, y, W, 1, dx, y, W, 1)
   }
-  // viñeta y scanlines
-  const vg = g.createRadialGradient(W / 2, H / 2, H * .2, W / 2, H / 2, W * .65)
-  vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(10,10,25,.35)')
-  g.fillStyle = vg; g.fillRect(0, 0, W, H)
+  // scanlines
   g.fillStyle = 'rgba(0,0,0,.07)'
   for (let y = 0; y < H; y += 3) g.fillRect(0, y, W, 1)
   g.filter = 'blur(.9px)'; g.drawImage(cv, 0, 0); g.filter = 'none'
