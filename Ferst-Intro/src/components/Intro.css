@@ -12,11 +12,6 @@
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background: repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px);
 }
-.intro-clock {
-  position: absolute; top: 6%; left: 0; right: 0; text-align: center;
-  font: 400 clamp(14px, 2.2vw, 20px) 'Times New Roman', Times, serif;
-  letter-spacing: .32em; color: rgba(214,214,230,.28);
-}
 .intro-win {
   position: relative; z-index: 1;
   width: min(420px, 100%);
