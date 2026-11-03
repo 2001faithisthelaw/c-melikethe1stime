@@ -216,7 +216,7 @@ export default function CUSeeMe({ onOpen }) {
     '"porque yo sigo ahí en algún rincón · y no hay ficción."',
     '"es un círculo, no una espiral."',
     '"habitaciones infinitas dentro de una misma casa."',
-    '"welcome 2 ur last fucking chance!"',
+    '"welcome 2 our memories."',
     '"y no me contestás."',
     '"me digo muchas cosas · pero el tiempo sigue pasando."',
     '"lo dije primero · y sigo sosteniéndolo aunque no lo devuelvas."',
@@ -335,7 +335,7 @@ export default function CUSeeMe({ onOpen }) {
   return (
     <section className="win cuseeme-win">
       <header className="mosaic-titlebar win-drag">
-        <span className="mosaic-title">C-Me like the 1st time — welcome 2 ur last fucking chance!</span>
+        <span className="mosaic-title">C-Me — like the 1st time</span>
         <span className="mosaic-controls">
           <span className="mc mc-min">_</span>
           <span className="mc mc-max">□</span>
@@ -448,22 +448,18 @@ export default function CUSeeMe({ onOpen }) {
 
       <div className="mosaic-page">
         <div className="cu-page-inner">
-          <h1 className="cu-logo cu-logo-img">
-            <img
-              src="/logo.png"
-              alt="C-Me like the 1st time — welcome 2 ur last fucking chance!"
-              onError={(e) => {
-                /* Si el PNG no está, muestra fallback de texto */
-                e.currentTarget.style.display = 'none'
-                const fb = e.currentTarget.nextElementSibling
-                if (fb) fb.style.display = 'block'
-              }}
-            />
-            <span className="cu-logo-fallback" style={{ display: 'none' }}>
-              C-Me <span className="cu-lasttime">like the 1st time</span>
-              <div className="cu-welcome-inline">welcome 2 ur last fucking chance!</div>
-            </span>
-          </h1>
+          <header className="cu-exhibit">
+            <h1 className="cu-mark">
+              <b>c-me</b>
+              <span className="cu-legend" aria-label="like the 1st time">
+                <i>like</i><span>the</span>
+                <i>1st</i><span>time</span>
+              </span>
+            </h1>
+            <p className="cu-tagline">welcome 2 our memories</p>
+            <p className="cu-date">illuno · dir. fé · 2026</p>
+            <span className="cu-mirror" aria-hidden="true">c-me.net</span>
+          </header>
           {!playerHidden && (
             <div className="cu-inline-player">
               <a
@@ -570,7 +566,7 @@ export default function CUSeeMe({ onOpen }) {
         <span className="ms-tab">memories</span>
         <span className="ms-tab">metasearch</span>
         <span className="ms-fill">
-          <span className="ms-fill-txt">listo · c-me.net · 9 transmisiones · 1 rechazada · illuno / fé</span>
+          <span className="ms-fill-txt">listo · c-me.net · 9 transmisiones · 1 rechazada</span>
         </span>
       </footer>
 

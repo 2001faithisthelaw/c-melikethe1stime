@@ -2,18 +2,19 @@ import { useEffect, useRef, useState } from 'react'
 import './ThemePicker.css'
 
 const THEMES = [
-  { id: 'silkroad', label: 'silkroad', detail: 'Georgia italic + Verdana (default)' },
+  { id: 'asua',     label: 'asua',     detail: 'Chemian + Arial · sage / rojo (default)' },
+  { id: 'silkroad', label: 'silkroad', detail: 'Georgia italic + Verdana' },
   { id: 'mssans',   label: 'ms sans',  detail: 'todo MS Sans Serif 8x16' },
   { id: 'dos',      label: 'dos vga',  detail: 'todo Perfect DOS VGA 437' },
   { id: 'w95fa',    label: 'w95fa',    detail: 'todo W95FA' },
   { id: 'terminal', label: 'terminal', detail: 'DOS · fósforo verde' },
 ]
 
-const STORAGE_KEY = 'sufro-theme'
+const STORAGE_KEY = 'cme-theme'
 
 export default function ThemePicker() {
   const [theme, setTheme] = useState(
-    () => (typeof localStorage !== 'undefined' && localStorage.getItem(STORAGE_KEY)) || 'silkroad'
+    () => (typeof localStorage !== 'undefined' && localStorage.getItem(STORAGE_KEY)) || 'asua'
   )
   const [open, setOpen] = useState(false)
   const ref = useRef(null)

@@ -133,7 +133,7 @@ export default function RetroPlayer({
         {coverSrc ? (
           <img src={coverSrc} alt="album cover" />
         ) : (
-          <span className="rp-cover-txt">(album<br/>cover<br/>here)</span>
+          <span className="rp-cover-txt"><b>c-me</b><small>1st recording</small></span>
         )}
       </div>
 
