@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Slot from '../components/Slot'
 import './LimeWire.css'
+import { asset } from '../asset'
 
 /* ─── Resultados: cada archivo referencia a un personaje real.
    Clickear la fila la selecciona (preview a la derecha).
@@ -9,7 +10,7 @@ const results = [
   {
     name:   'usuario_bloqueado_2004.wmv',
     size:   '14.2 MB', kbps: '256', q: 4, status: 'done',
-    src:    '/lw01.mp4',
+    src:    asset('/lw01.mp4'),
     author: 'usuario_bloqueado',
     notes:  'lo dije primero · no lo devolviste',
     refs:   ['t_amo_para_siempre', 'te_extraño'],
@@ -18,7 +19,7 @@ const results = [
   {
     name:   'usuario_bloqueado_2004(1).wmv',
     size:   '14.2 MB', kbps: '256', q: 4, status: 'done',
-    src:    '/lw01.mp4',
+    src:    asset('/lw01.mp4'),
     author: 'usuario_bloqueado',
     notes:  'duplicado — misma cara, misma persona?',
     refs:   ['ella?', 'alguien_como_vos'],
@@ -75,7 +76,7 @@ const results = [
   {
     name:   'camara_hotel_9_(piso_3).wmv',
     size:   '22.4 MB', kbps: '512', q: 5, status: 'dl', p: 12,
-    src:    '/lw02.mp4',
+    src:    asset('/lw02.mp4'),
     author: 'donde_estas?',
     notes:  'vigilancia · tercera puerta a la izquierda',
     refs:   ['dejame_en_paz', 'alguien_como_vos'],

@@ -7,6 +7,7 @@ import RetroPlayerWindow from './components/RetroPlayerWindow'
 import WindowFrame from './components/WindowFrame'
 import ThemePicker from './components/ThemePicker'
 import Intro from './components/Intro'
+import { asset } from './asset'
 
 const APPS = {
   msn:      { Component: MSN,               label: 'MSN Messenger', pos: { x: 120, y: 90  } },
@@ -142,7 +143,7 @@ export default function App() {
               title={w.props?.contact ? `${APPS[w.app].label} — ${w.props.contact}` : APPS[w.app].label}
             >
               <span className="os-taskicon">
-                {w.app === 'msn'      ? <img src="/msg.png" alt="msn" className="os-taskicon-img" draggable={false} /> :
+                {w.app === 'msn'      ? <img src={asset("/msg.png")} alt="msn" className="os-taskicon-img" draggable={false} /> :
                  w.app === 'limewire' ? '🔍' :
                  w.app === 'mp3'      ? '♪' :
                                         '📰'}

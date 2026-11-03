@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { asset } from '../asset'
 
 /* Recuadro de cam de usuario_bloqueado: links de texto sobre una foto desenfocada.
    Cada click pasa al siguiente bloque: cambia la foto y el link queda "visitado". */
@@ -10,7 +11,7 @@ const BLOCKS = [
   { text: 'CLICK to forget!' },
   { text: 'CLICK to be pure!' },
 ]
-const PHOTOS = [1, 2, 3, 4, 5, 6].map(n => `/blocks/b${n}.jpg`)
+const PHOTOS = [1, 2, 3, 4, 5, 6].map(n => asset(`/blocks/b${n}.jpg`))
 
 export default function BlockedCam() {
   const [idx, setIdx] = useState(0)
