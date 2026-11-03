@@ -1,40 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import { asset } from '../asset'
 import './Intro.css'
 
 /* Intro: diálogo de confirmación. Los tres botones dicen NO y los tres entran. */
 const QUESTION = 'Estas seguro de volver a hacer lo mismo otra vez?'
-
-/* calavera pixelada (16x16) — '#' hueso, 'k' negro */
-const SKULL = [
-  '....########....',
-  '..############..',
-  '.##############.',
-  '.##############.',
-  '.###kkk##kkk###.',
-  '.##kkkk##kkkk##.',
-  '.##kkkk##kkkk##.',
-  '.###kkk##kkk###.',
-  '..######kk######',
-  '..#####kkkk####.',
-  '...##########...',
-  '...##.#.#.#.##..',
-  '...##.#.#.#.##..',
-  '....##########..',
-]
-
-function Skull() {
-  const rects = []
-  SKULL.forEach((row, y) => [...row].forEach((c, x) => {
-    if (c !== '.') rects.push(<rect key={`${x}-${y}`} x={x} y={y} width="1.02" height="1.02" fill={c === 'k' ? '#111' : '#f0f0f0'} />)
-  }))
-  return (
-    <svg className="intro-icon" viewBox="0 0 16 16" shapeRendering="crispEdges" aria-hidden="true">
-      <g stroke="#111" strokeWidth="2.6" strokeLinecap="square"><line x1="1.5" y1="10.5" x2="14.5" y2="15.2" /><line x1="14.5" y1="10.5" x2="1.5" y2="15.2" /></g>
-      <g stroke="#f0f0f0" strokeWidth="1.2" strokeLinecap="square"><line x1="1.5" y1="10.5" x2="14.5" y2="15.2" /><line x1="14.5" y1="10.5" x2="1.5" y2="15.2" /></g>
-      {rects}
-    </svg>
-  )
-}
 
 const pad = (n) => String(n).padStart(2, '0')
 
@@ -69,7 +38,7 @@ export default function Intro({ onDone }) {
       <div className="intro-win">
         <div className="intro-bar"><span>CONFIRMACIÓN</span><span className="intro-x">×</span></div>
         <div className="intro-body">
-          <Skull />
+          <img className="intro-icon" src={asset('/icons/warn.png')} alt="" draggable={false} />
           <p>{QUESTION}</p>
         </div>
         <div className="intro-foot">

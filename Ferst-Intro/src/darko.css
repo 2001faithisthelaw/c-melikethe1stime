@@ -143,3 +143,7 @@
 [data-theme="silkroad"] .retro-player { box-shadow: 0 1px 6px rgba(30,30,50,.08); border-color: var(--dd-line); }
 [data-theme="silkroad"] .badge-live,
 [data-theme="silkroad"] .msn-live { border-radius: 2px; }
+
+/* tarjeta usuario_bloqueado: f(x) entero sobre fondo claro */
+[data-theme="silkroad"] .cu-blocked { background: #e9eaee; }
+[data-theme="silkroad"] .cu-blocked-img { object-fit: contain; object-position: center; padding: 6px; filter: none; }

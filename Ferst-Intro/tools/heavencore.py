@@ -1,4 +1,4 @@
-"""heavencore: grade pálido (ref. treasury) + blur de cara con tracking + lightburst.
+"""heavencore: grade pálido (ref. treasury) + pixelado general + cara en bloques (con tracking).
 
 Lee los originales de media-src/ y escribe en public/ con el mismo nombre.
 Uso:  pip install opencv-python-headless numpy  &&  python3 tools/heavencore.py
@@ -66,21 +66,37 @@ def grade(img,W,rng):
     img+=rng.normal(0,.018,img.shape[:2])[...,None].astype(np.float32)
     return np.clip(img,0,1)
 
-def face_fx(img,cx,cy,R,t,W,H):
+def make_cells(W,H,cs,seed=11):
+    """patrón fijo de bloques: desplazamientos y bloques grandes estables en el tiempo"""
+    gw,gh=W//cs+2,H//cs+2
+    r=np.random.default_rng(seed)
+    return gw,gh,r.integers(-1,2,(gh,gw)),r.integers(-1,2,(gh,gw)),r.random((gh//2+2,gw//2+2))<.34
+
+def mosaic(img,cs,cells):
+    """pixelado en bloques irregulares (estilo macrobloques de video comprimido)"""
+    H,W=img.shape[:2]; gw,gh,ox,oy,big=cells
+    pad=cv2.copyMakeBorder(img,0,gh*cs-H,0,gw*cs-W,cv2.BORDER_REPLICATE)
+    small=cv2.resize(pad,(gw,gh),interpolation=cv2.INTER_AREA)         # color medio por celda
+    yy,xx=np.mgrid[0:gh,0:gw]
+    sm=small[np.clip(yy+oy,0,gh-1),np.clip(xx+ox,0,gw-1)]              # bloques corridos
+    bs=cv2.resize(small,(gw//2+1,gh//2+1),interpolation=cv2.INTER_AREA) # bloques de 2x2
+    bigup=np.repeat(np.repeat(bs,2,0),2,1)[:gh,:gw]
+    bm=np.repeat(np.repeat(big,2,0),2,1)[:gh,:gw,None]
+    sm=np.where(bm,bigup,sm)
+    return cv2.resize(sm,(gw*cs,gh*cs),interpolation=cv2.INTER_NEAREST)[:H,:W]
+
+def face_fx(img,cx,cy,R,t,W,H,cs,cells):
     yy,xx=np.mgrid[0:H,0:W].astype(np.float32)
     dx,dy=xx-cx,yy-cy; d=np.sqrt(dx*dx+dy*dy)+1e-3
-    # blur blando y grande sobre la cara (elipse vertical, borde muy difuso)
-    e=np.sqrt((dx/(R*1.55))**2+(dy/(R*1.95))**2)
-    m=np.clip(1.35-e,0,1); m=gblur(m,R*.55)[...,None]; m=np.clip(m*1.25,0,1)
-    bl=gblur(img,R*.9); bl=bl*.30+.70*np.array([1,.975,.96],np.float32)   # casi quemado en blanco
-    img=img*(1-m)+bl*m
-    # luz: núcleo suave + halo amplio, respira lento. Sin rayos.
-    core=np.exp(-(d/(R*.95))**2)*.78
-    halo=np.exp(-(d/(R*2.8))**2)*.50
-    fl=.95+.05*np.sin(t*2.2)
-    light=np.clip((core+halo)*fl,0,1)[...,None]
-    col=np.array([1,.975,.955],np.float32)
-    return np.clip(1-(1-img)*(1-light*col),0,1)
+    # la cara se cubre con bloques pixelados, pálidos y apenas suavizados
+    e=np.sqrt((dx/(R*1.35))**2+(dy/(R*1.7))**2)
+    m=np.clip(1.15-e,0,1); m=gblur(m,R*.22)[...,None]; m=np.clip(m*1.6,0,1)
+    blocks=gblur(mosaic(img,cs,cells),max(.6,cs*.14))
+    blocks=blocks*.82+.18*np.array([1,.975,.955],np.float32)
+    img=img*(1-m)+blocks*m
+    # halo muy tenue
+    light=(np.exp(-(d/(R*2.4))**2)*.20*(.95+.05*np.sin(t*2.2)))[...,None]
+    return np.clip(1-(1-img)*(1-light*np.array([1,.975,.955],np.float32)),0,1)
 
 def run(name):
     cap=cv2.VideoCapture(SRC+name); fps=cap.get(cv2.CAP_PROP_FPS); frs=[]
@@ -91,12 +107,15 @@ def run(name):
     n=len(frs); H,W=frs[0].shape[:2]
     tr=from_detect(name,n,W,H) if name in DETECT else interp(KF[name],n)
     tr=smooth(tr); rng=np.random.default_rng(7)
+    cs=max(4,int(round(float(np.median(tr[:,2]))*W*.40)))     # tamaño de bloque en la cara
+    cells=make_cells(W,H,cs); px=max(2,int(round(W/120)))      # pixelado general
     p=subprocess.Popen(['ffmpeg','-v','error','-y','-f','rawvideo','-pix_fmt','bgr24','-s',f'{W}x{H}','-r',str(fps),'-i','-',
         '-c:v','libx264','-preset','slow','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart','-an',OUT+name],stdin=subprocess.PIPE)
     for i,f in enumerate(frs):
         img=cv2.cvtColor(f,cv2.COLOR_BGR2RGB).astype(np.float32)/255
         img=grade(img,W,rng)
-        cx,cy,r=tr[i]; img=face_fx(img,cx*W,cy*H,r*W,i/fps,W,H)
+        img=cv2.resize(cv2.resize(img,(max(1,W//px),max(1,H//px)),interpolation=cv2.INTER_AREA),(W,H),interpolation=cv2.INTER_NEAREST)
+        cx,cy,r=tr[i]; img=face_fx(img,cx*W,cy*H,r*W,i/fps,W,H,cs,cells)
         p.stdin.write(cv2.cvtColor((img*255+.5).astype(np.uint8),cv2.COLOR_RGB2BGR).tobytes())
     p.stdin.close(); p.wait(); print('ok',name,n)
 

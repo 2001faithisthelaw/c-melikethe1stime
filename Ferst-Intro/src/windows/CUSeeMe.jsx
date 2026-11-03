@@ -509,8 +509,8 @@ export default function CUSeeMe({ onOpen }) {
                     <div className="cu-blocked">
                       <img
                         className="cu-blocked-img"
-                        src={asset("/WhatsApp%20Image%202026-07-09%20at%206.44.46%20AM.jpeg")}
-                        alt="usuario_bloqueado"
+                        src={asset("/blocks/fx.png")}
+                        alt="f(x)"
                         draggable={false}
                       />
                     </div>

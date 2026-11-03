@@ -540,5 +540,6 @@
 .bcam-link:focus-visible { outline: 1px dotted #000; outline-offset: 1px; }
 
 /* cámara de usuario_bloqueado: imagen fija, sin velo ni blur */
-.bcam-fixed { background: #e9eaee; display: grid; place-items: center; }
-.bcam-fixed img { width: 100%; height: 100%; object-fit: contain; image-rendering: auto; }
+.bcam-fixed { background: #e9eaee; }
+.bcam-fixed img { position: absolute; inset: 0 0 26% 0; width: 100%; height: 74%; object-fit: contain; image-rendering: auto; }
+.bcam-over { position: absolute; left: 6px; right: 6px; bottom: 8px; width: auto; font-size: clamp(12px, 1.5vw, 15px); }
