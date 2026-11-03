@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from 'react'
 import Slot from '../components/Slot'
+import BlockedCam from '../components/BlockedCam'
 import './MSN.css'
 
 /* ─── Historias específicas por contacto ─── */
@@ -385,11 +386,15 @@ export default function MSN({
           <div className="msn-cam-title">
             {blocked ? 'cámara (denegada)' : `cam de ${contact}`}
           </div>
-          <Slot
-            dataSrc={feedSrc}
-            label={blocked ? 'CONEXIÓN RECHAZADA' : 'ESPERANDO SEÑAL'}
-            aspect="4 / 3"
-          />
+          {(blocked || contact === 'usuario_bloqueado') ? (
+            <BlockedCam />
+          ) : (
+            <Slot
+              dataSrc={feedSrc}
+              label="ESPERANDO SEÑAL"
+              aspect="4 / 3"
+            />
+          )}
           <div className="msn-cam-foot">
             <span className={`msn-dot ${blocked ? 'msn-dot-off' : 'msn-dot-on'}`} />
             {blocked ? 'sin respuesta' : 'transmitiendo'}

@@ -501,3 +501,40 @@
   /* Status footer oculto en mobile — ocupa espacio sin dar info */
   .msn-status { display: none; }
 }
+
+/* ═══ Cam de usuario_bloqueado — bloques de links ═══ */
+.bcam {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--grey-light);
+  border-radius: 4px;
+  background: #e9e9ee;
+}
+.bcam-photo {
+  position: absolute; inset: -12%;
+  background-size: cover; background-position: center;
+  filter: blur(7px) saturate(.7) brightness(1.08);
+  transform: scale(1.06);
+  transition: opacity .35s steps(5);
+}
+.bcam-photo.swap { opacity: 0; }
+.bcam-veil { position: absolute; inset: 0; background: rgba(244,244,248,.32); }
+.bcam-links {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6px 10px;
+  font: 400 clamp(11px, 1.45vw, 15px)/1.18 'Times New Roman', Times, serif;
+}
+.bcam-link {
+  display: block; width: 100%;
+  background: none; border: 0; padding: 0; margin: 0;
+  text-align: left; cursor: pointer;
+  font: inherit; color: #1a3fd0; text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.bcam-link.lead { color: #1a1aa6; text-decoration: none; margin-bottom: 5px; }
+.bcam-link:hover { color: #c01010; }
+.bcam-link.seen { color: #551a8b; }
+.bcam-link:focus-visible { outline: 1px dotted #000; outline-offset: 1px; }
