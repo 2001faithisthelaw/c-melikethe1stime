@@ -51,6 +51,7 @@ def gblur(img,s):
     return cv2.GaussianBlur(img,(0,0),max(.1,s))
 
 def grade(img,W,rng):
+    img=img*.45+gblur(img,W*.006)*.55           # suavidad general (ablanda los gifs)
     lum=img@np.array([.299,.587,.114],np.float32)
     L=lum[...,None]
     img=L+(img-L)*.55                          # menos saturado
@@ -60,29 +61,25 @@ def grade(img,W,rng):
     hi=np.array([1.0,.955,.905],np.float32)     # altas crema-rosado
     img=img*(1-(1-L)*.30)+sh*(1-L)*.30
     img=img*(hi*L+(1-L))
-    g=gblur(img,W*.035)
-    img=1-(1-img)*(1-g*.38)                    # bloom
+    g=gblur(img,W*.06)
+    img=1-(1-img)*(1-g*.5)                    # bloom
     img+=rng.normal(0,.018,img.shape[:2])[...,None].astype(np.float32)
     return np.clip(img,0,1)
 
 def face_fx(img,cx,cy,R,t,W,H):
     yy,xx=np.mgrid[0:H,0:W].astype(np.float32)
     dx,dy=xx-cx,yy-cy; d=np.sqrt(dx*dx+dy*dy)+1e-3
-    # blur blando sobre la cara, elipse vertical difuminada
-    e=np.sqrt((dx/(R*1.25))**2+(dy/(R*1.55))**2)
-    m=np.clip(1.25-e,0,1); m=gblur(m,R*.35)[...,None]
-    bl=gblur(img,R*.42); bl=bl*.45+.55*np.array([1,.975,.96],np.float32)   # quemado en blanco
+    # blur blando y grande sobre la cara (elipse vertical, borde muy difuso)
+    e=np.sqrt((dx/(R*1.55))**2+(dy/(R*1.95))**2)
+    m=np.clip(1.35-e,0,1); m=gblur(m,R*.55)[...,None]; m=np.clip(m*1.25,0,1)
+    bl=gblur(img,R*.9); bl=bl*.30+.70*np.array([1,.975,.96],np.float32)   # casi quemado en blanco
     img=img*(1-m)+bl*m
-    # lightburst: núcleo + halo + rayos finos que giran lento
-    core=np.exp(-(d/(R*.60))**2)
-    halo=np.exp(-(d/(R*1.9))**2)*.42
-    ang=np.arctan2(dy,dx)+t*.25; rays=np.zeros_like(d)
-    for k,(a0,wid,ln) in enumerate([(0,.035,4.2),(np.pi/3,.025,3.0),(2*np.pi/3,.03,3.6),(np.pi,.035,4.2),(4*np.pi/3,.025,3.0),(5*np.pi/3,.03,3.6),(np.pi/6,.015,2.2),(7*np.pi/6,.015,2.2)]):
-        da=np.angle(np.exp(1j*(ang-a0)))
-        rays+=np.exp(-(da/wid)**2)*np.exp(-d/(R*ln))
-    fl=.92+.08*np.sin(t*7.0)
-    light=np.clip((core*1.05+halo+rays*.38)*fl,0,1)[...,None]
-    col=np.array([1,.97,.95],np.float32)
+    # luz: núcleo suave + halo amplio, respira lento. Sin rayos.
+    core=np.exp(-(d/(R*.95))**2)*.78
+    halo=np.exp(-(d/(R*2.8))**2)*.50
+    fl=.95+.05*np.sin(t*2.2)
+    light=np.clip((core+halo)*fl,0,1)[...,None]
+    col=np.array([1,.975,.955],np.float32)
     return np.clip(1-(1-img)*(1-light*col),0,1)
 
 def run(name):
