@@ -62,7 +62,9 @@ video, img {
   image-rendering: -moz-crisp-edges;
 }
 .slot-media {
-  filter: contrast(1.08) saturate(0.88);
+  /* el look heavencore + blur de cara ya viene horneado en los mp4
+     (tools/heavencore.py) — sin filtros CSS encima */
+  filter: none !important;
 }
 
 .os-main {

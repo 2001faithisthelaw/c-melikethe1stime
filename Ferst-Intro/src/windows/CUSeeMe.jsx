@@ -335,7 +335,7 @@ export default function CUSeeMe({ onOpen }) {
   return (
     <section className="win cuseeme-win">
       <header className="mosaic-titlebar win-drag">
-        <span className="mosaic-title">C-Me like the 1st time — welcome 2 ur last fucking chance!</span>
+        <span className="mosaic-title">C-Me — like the 1st time</span>
         <span className="mosaic-controls">
           <span className="mc mc-min">_</span>
           <span className="mc mc-max">□</span>
