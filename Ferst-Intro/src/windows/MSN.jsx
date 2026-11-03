@@ -1,6 +1,8 @@
 import { useMemo, useRef, useState } from 'react'
 import Slot from '../components/Slot'
+import BlockedCam from '../components/BlockedCam'
 import './MSN.css'
+import { asset } from '../asset'
 
 /* ─── Historias específicas por contacto ─── */
 /*  Nota: cualquier @usuario dentro de text se renderiza como enlace clickeable
@@ -316,7 +318,7 @@ export default function MSN({
   return (
     <section className="win msn-win">
       <header className="msn-title win-drag">
-        <img src="/msg.png" alt="msn" className="msn-t-icon" draggable={false} />
+        <img src={asset("/msg.png")} alt="msn" className="msn-t-icon" draggable={false} />
         <span className="msn-t-text">{contact} — conversación</span>
         <span className="msn-t-ctrls">
           <button className="mc mc-min" onClick={onMin} title="minimizar">_</button>
@@ -385,11 +387,15 @@ export default function MSN({
           <div className="msn-cam-title">
             {blocked ? 'cámara (denegada)' : `cam de ${contact}`}
           </div>
-          <Slot
-            dataSrc={feedSrc}
-            label={blocked ? 'CONEXIÓN RECHAZADA' : 'ESPERANDO SEÑAL'}
-            aspect="4 / 3"
-          />
+          {(blocked || contact === 'usuario_bloqueado') ? (
+            <BlockedCam photo={asset('/blocks/fx.png')} />
+          ) : (
+            <Slot
+              dataSrc={feedSrc}
+              label="ESPERANDO SEÑAL"
+              aspect="4 / 3"
+            />
+          )}
           <div className="msn-cam-foot">
             <span className={`msn-dot ${blocked ? 'msn-dot-off' : 'msn-dot-on'}`} />
             {blocked ? 'sin respuesta' : 'transmitiendo'}

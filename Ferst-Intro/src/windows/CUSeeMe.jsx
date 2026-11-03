@@ -6,6 +6,7 @@ import FakeDevTools from '../components/FakeDevTools'
 import RetroPlayer from '../components/RetroPlayer'
 import ApologyPopup from '../components/ApologyPopup'
 import './CUSeeMe.css'
+import { asset } from '../asset'
 
 /* ─── 9 transmisiones — fragmentos de la misma obsesión ─── */
 const feeds = [
@@ -16,7 +17,7 @@ const feeds = [
     sub:    'no pronuncies mi nombre',
     views:  '84,151',  ago: '3 semanas',
     fps: '14.7', kbps: '18',
-    src: '/Convert%20to%20GIF%20project%20-%2009%20July%202026%20at%2001.01.42.mp4',
+    src: asset('/Convert%20to%20GIF%20project%20-%2009%20July%202026%20at%2001.01.42.mp4'),
   },
   {
     handle: 'ella?',
@@ -24,7 +25,7 @@ const feeds = [
     title:  'todavía sos vos?',
     sub:    'sigo buscando a alguien q se parezca',
     views:  '175,155', ago: '2 meses',
-    fps: '17.3', kbps: '7',  src: '/1.mp4',
+    fps: '17.3', kbps: '7',  src: asset('/1.mp4'),
   },
   {
     handle: 'donde_estas?',
@@ -32,7 +33,7 @@ const feeds = [
     title:  'te busqué en todos lados',
     sub:    '_no location found',
     views:  '103,919', ago: '2 meses',
-    fps: '16.7', kbps: '8',  src: '/nomiresparaabajo.mp4',
+    fps: '16.7', kbps: '8',  src: asset('/nomiresparaabajo.mp4'),
   },
   {
     handle: 'dejame_en_paz',
@@ -40,7 +41,7 @@ const feeds = [
     title:  'no m hables +',
     sub:    'no aguanto posta',
     views:  '84,786',  ago: '3 meses',
-    fps: '16.8', kbps: '17', src: '/pucho(1).mp4',
+    fps: '16.8', kbps: '17', src: asset('/pucho(1).mp4'),
   },
   {
     handle: 'usuario_bloqueado',
@@ -56,7 +57,7 @@ const feeds = [
     title:  'aunque me haga mal',
     sub:    'sigo escribiéndote cosas que no voy a mandar',
     views:  '130,517', ago: '5 meses',
-    fps: '16.7', kbps: '15', src: '/dancingwiththestars(1).mp4',
+    fps: '16.7', kbps: '15', src: asset('/dancingwiththestars(1).mp4'),
   },
   {
     handle: 'fé',
@@ -65,7 +66,7 @@ const feeds = [
     sub:    'mientras tenga fé',
     views:  '1',       ago: 'siempre',
     fps: '24.0', kbps: '—',
-    src: '/Convert%20to%20GIF%20project%20-%2009%20July%202026%20at%2001.01.42-3.mp4',
+    src: asset('/Convert%20to%20GIF%20project%20-%2009%20July%202026%20at%2001.01.42-3.mp4'),
   },
   {
     handle: 'vox_record_001',
@@ -73,7 +74,7 @@ const feeds = [
     title:  'última cosa que dijiste',
     sub:    'la escucho todas las noches',
     views:  '236,036', ago: '10 meses',
-    fps: '13.1', kbps: '11', src: '/champan.mp4',
+    fps: '13.1', kbps: '11', src: asset('/champan.mp4'),
   },
   {
     handle: 't_amo_para_siempre',
@@ -82,7 +83,7 @@ const feeds = [
     sub:    'y sigo sosteniéndolo aunque no lo devuelvas',
     views:  '204,848', ago: '11 meses',
     fps: '15.6', kbps: '8',
-    src: '/Convert%20to%20GIF%20project%20-%2009%20July%202026%20at%2001.01.42-6.mp4',
+    src: asset('/Convert%20to%20GIF%20project%20-%2009%20July%202026%20at%2001.01.42-6.mp4'),
   },
 ]
 
@@ -100,19 +101,19 @@ const bookmarks = [
   {
     app:   'msn',
     label: 'MSN Messenger',
-    icon:  <IconImg src="/msg.png" alt="MSN" />,
+    icon:  <IconImg src={asset("/msg.png")} alt="MSN" />,
     emoji: '💬',
   },
   {
     app:   'limewire',
     label: 'donde_estas?',
-    icon:  <IconImg src="/wacha.png" alt="search" size="lg" />,
+    icon:  <IconImg src={asset("/wacha.png")} alt="search" size="lg" />,
     emoji: '🔍',
   },
   {
     app:   'mp3',
     label: 'notas de voz eliminadas',
-    icon:  <IconImg src="/carpeta%20audio.png" alt="audio folder" />,
+    icon:  <IconImg src={asset("/carpeta%20audio.png")} alt="audio folder" />,
     emoji: '♪',
   },
 ]
@@ -450,7 +451,7 @@ export default function CUSeeMe({ onOpen }) {
         <div className="cu-page-inner">
           <h1 className="cu-logo cu-logo-img">
             <img
-              src="/logo.png"
+              src={asset("/logo.png")}
               alt="C-Me like the 1st time — welcome 2 ur last fucking chance!"
               onError={(e) => {
                 /* Si el PNG no está, muestra fallback de texto */
@@ -468,7 +469,7 @@ export default function CUSeeMe({ onOpen }) {
             <div className="cu-inline-player">
               <a
                 className="cu-inline-player-dl"
-                href="/first-recording.mp3"
+                href={asset("/first-recording.mp3")}
                 download="first-recording.mp3"
                 title="descargar mp3"
                 aria-label="descargar"
@@ -482,7 +483,7 @@ export default function CUSeeMe({ onOpen }) {
               <RetroPlayer
                 artist="????"
                 track="xfavor no t olvides de esto"
-                src="/first-recording.mp3"
+                src={asset("/first-recording.mp3")}
               />
             </div>
           )}
@@ -508,8 +509,8 @@ export default function CUSeeMe({ onOpen }) {
                     <div className="cu-blocked">
                       <img
                         className="cu-blocked-img"
-                        src="/WhatsApp%20Image%202026-07-09%20at%206.44.46%20AM.jpeg"
-                        alt="usuario_bloqueado"
+                        src={asset("/blocks/fx.png")}
+                        alt="f(x)"
                         draggable={false}
                       />
                     </div>

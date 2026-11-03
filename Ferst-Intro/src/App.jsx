@@ -6,6 +6,8 @@ import Classifieds from './windows/Classifieds'
 import RetroPlayerWindow from './components/RetroPlayerWindow'
 import WindowFrame from './components/WindowFrame'
 import ThemePicker from './components/ThemePicker'
+import Intro from './components/Intro'
+import { asset } from './asset'
 
 const APPS = {
   msn:      { Component: MSN,               label: 'MSN Messenger', pos: { x: 120, y: 90  } },
@@ -15,6 +17,17 @@ const APPS = {
 }
 
 export default function App() {
+  // intro / captcha: una vez por sesión (agregá ?intro a la URL para verla de nuevo)
+  const [entered, setEntered] = useState(() => {
+    try {
+      if (new URLSearchParams(window.location.search).has('intro')) return false
+      return sessionStorage.getItem('cme-in') === '1'
+    } catch { return false }
+  })
+  const finishIntro = () => {
+    try { sessionStorage.setItem('cme-in', '1') } catch {}
+    setEntered(true)
+  }
   // wins: [{ id, app, props }]
   const [wins, setWins]       = useState([])
   const [minimized, setMin]   = useState({})
@@ -73,6 +86,7 @@ export default function App() {
 
   return (
     <div className="os">
+      {!entered && <Intro onDone={finishIntro} />}
       <div className="os-main">
         <CUSeeMe onOpen={openApp} />
       </div>
@@ -129,7 +143,7 @@ export default function App() {
               title={w.props?.contact ? `${APPS[w.app].label} — ${w.props.contact}` : APPS[w.app].label}
             >
               <span className="os-taskicon">
-                {w.app === 'msn'      ? <img src="/msg.png" alt="msn" className="os-taskicon-img" draggable={false} /> :
+                {w.app === 'msn'      ? <img src={asset("/msg.png")} alt="msn" className="os-taskicon-img" draggable={false} /> :
                  w.app === 'limewire' ? '🔍' :
                  w.app === 'mp3'      ? '♪' :
                                         '📰'}

@@ -74,7 +74,7 @@
   font-family: var(--f-ui);
   border-radius: 2px;
 }
-.tp-item:hover { background: linear-gradient(180deg, #cde5f5 0%, #9dcbea 100%); color: var(--black); }
+.tp-item:hover { background: #cde5f5; color: var(--black); }
 .tp-item:hover .tp-item-detail { color: rgba(0,0,0,0.65); }
 .tp-item.active { background: transparent; }
 .tp-item.active::before { content: '● '; color: var(--red); }

@@ -187,7 +187,7 @@
   border-radius: 3px;
   align-self: center;
   flex: none;
-  background: linear-gradient(180deg, #f27373 0%, #d64040 50%, #b02020 100%);
+  background: #d64040;
   color: #ffffff;
 }
 .msn-presence.on {
@@ -225,13 +225,13 @@
 }
 .msn-log::-webkit-scrollbar-track {
   background:
-    linear-gradient(90deg, #d4d0c8 0%, #ece9d8 50%, #d4d0c8 100%);
+    #ece9d8;
   border-left: 1px solid #808080;
   box-shadow: inset 1px 0 0 #ffffff;
 }
 .msn-log::-webkit-scrollbar-thumb {
   background:
-    linear-gradient(180deg, #ffffff 0%, #ece9d8 45%, #d4d0c8 100%);
+    #ece9d8;
   border: 1px solid #7a7a7a;
   box-shadow:
     inset 1px 1px 0 #ffffff,
@@ -240,12 +240,12 @@
 }
 .msn-log::-webkit-scrollbar-thumb:hover {
   background:
-    linear-gradient(180deg, #ffffff 0%, #ece9d8 50%, #cfc9b8 100%);
+    #ece9d8;
 }
 .msn-log::-webkit-scrollbar-button {
   height: 16px; width: 16px;
   background:
-    linear-gradient(180deg, #ffffff 0%, #ece9d8 45%, #d4d0c8 100%);
+    #ece9d8;
   border: 1px solid #7a7a7a;
   box-shadow:
     inset 1px 1px 0 #ffffff,
@@ -253,8 +253,8 @@
   display: block;
 }
 .msn-log::-webkit-scrollbar-button:vertical:decrement {
+  background-color: #ece9d8;
   background-image:
-    linear-gradient(180deg, #ffffff 0%, #ece9d8 45%, #d4d0c8 100%),
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><polygon points='4,10 12,10 8,5' fill='%23000'/></svg>");
   background-blend-mode: normal;
 }
@@ -501,3 +501,45 @@
   /* Status footer oculto en mobile — ocupa espacio sin dar info */
   .msn-status { display: none; }
 }
+
+/* ═══ Cam de usuario_bloqueado — bloques de links ═══ */
+.bcam {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--grey-light);
+  border-radius: 4px;
+  background: #e9e9ee;
+}
+.bcam-photo {
+  position: absolute; inset: -12%;
+  background-size: cover; background-position: center;
+  filter: blur(7px) saturate(.7) brightness(1.08);
+  transform: scale(1.06);
+  transition: opacity .35s steps(5);
+}
+.bcam-photo.swap { opacity: 0; }
+.bcam-veil { position: absolute; inset: 0; background: rgba(244,244,248,.32); }
+.bcam-links {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6px 10px;
+  font: 400 clamp(11px, 1.45vw, 15px)/1.18 'Times New Roman', Times, serif;
+}
+.bcam-link {
+  display: block; width: 100%;
+  background: none; border: 0; padding: 0; margin: 0;
+  text-align: left; cursor: pointer;
+  font: inherit; color: #1a3fd0; text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.bcam-link.lead { color: #1a3fd0; text-decoration: underline; text-align: center; font-size: clamp(13px, 1.7vw, 17px); line-height: 1.25; }
+.bcam-link:hover { color: #c01010; }
+.bcam-link.seen { color: #551a8b; }
+.bcam-link:focus-visible { outline: 1px dotted #000; outline-offset: 1px; }
+
+/* cámara de usuario_bloqueado: imagen fija, sin velo ni blur */
+.bcam-fixed { background: #e9eaee; }
+.bcam-fixed img { position: absolute; inset: 0 0 26% 0; width: 100%; height: 74%; object-fit: contain; image-rendering: auto; }
+.bcam-over { position: absolute; left: 6px; right: 6px; bottom: 8px; width: auto; font-size: clamp(12px, 1.5vw, 15px); }

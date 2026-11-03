@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './Slot.css'
+import BlockedCam from './BlockedCam'
 
 /**
  * Slot: contenedor drag-and-drop / click-to-browse para video o imagen.
@@ -96,7 +97,13 @@ export default function Slot({
         />
       )}
 
-      {!mediaUrl && (
+      {!mediaUrl && /SEÑAL|RECHAZADA/i.test(label) && (
+        <div className="slot-links" onClick={(e) => e.stopPropagation()}>
+          <BlockedCam />
+        </div>
+      )}
+
+      {!mediaUrl && !/SEÑAL|RECHAZADA/i.test(label) && (
         <div className="slot-empty">
           <div className="slot-noise" />
           <div className="slot-bars" />

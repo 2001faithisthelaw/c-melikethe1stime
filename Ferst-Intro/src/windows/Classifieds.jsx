@@ -1,5 +1,6 @@
 import Slot from '../components/Slot'
 import './Classifieds.css'
+import { asset } from '../asset'
 
 export default function Classifieds({ onClose, onMin, onMax, isMaximized }) {
   return (
@@ -47,7 +48,7 @@ export default function Classifieds({ onClose, onMin, onMax, isMaximized }) {
 
             <article className="ads-item photo">
               <div className="ads-photoslot">
-                <Slot dataSrc="/ad-photo-1.jpg" label="FOTO · SIN FIRMAR" aspect="4 / 3" fit="cover" />
+                <Slot dataSrc={asset("/ad-photo-1.jpg")} label="FOTO · SIN FIRMAR" aspect="4 / 3" fit="cover" />
               </div>
               <p className="ads-cap">última fotografía conocida · <em>ella</em></p>
             </article>
@@ -86,7 +87,7 @@ export default function Classifieds({ onClose, onMin, onMax, isMaximized }) {
 
             <article className="ads-item photo">
               <div className="ads-photoslot small">
-                <Slot dataSrc="/ad-photo-2.jpg" label="FOTO · CAM 3AM" aspect="1 / 1" fit="cover" />
+                <Slot dataSrc={asset("/ad-photo-2.jpg")} label="FOTO · CAM 3AM" aspect="1 / 1" fit="cover" />
               </div>
               <p className="ads-cap">vista desde el hotel de la 9 · sin confirmar</p>
             </article>
@@ -135,7 +136,7 @@ export default function Classifieds({ onClose, onMin, onMax, isMaximized }) {
 
             <article className="ads-item photo">
               <div className="ads-photoslot tall">
-                <Slot dataSrc="/ad-photo-3.jpg" label="RETRATO" aspect="3 / 4" fit="cover" />
+                <Slot dataSrc={asset("/ad-photo-3.jpg")} label="RETRATO" aspect="3 / 4" fit="cover" />
               </div>
               <p className="ads-cap">— Q.E.P.D. — cuando mires para arriba y veas mi nombre</p>
             </article>

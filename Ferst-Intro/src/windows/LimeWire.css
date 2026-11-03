@@ -37,7 +37,7 @@
 .lw-t-icon, .lw-t-text, .lw-ctrls { position: relative; z-index: 1; }
 .lw-t-icon {
   width: 14px; height: 14px;
-  background: radial-gradient(circle at 30% 30%, #eaff8a 0 3px, #7bc043 4px 8px, #3f6b1e 9px 100%);
+  background: #7bc043;
   border-radius: 50%;
   flex: none;
 }
@@ -106,7 +106,7 @@
 }
 .lw-tab {
   padding: 6px 14px;
-  background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
+  background: #f5f5f5;
   color: var(--grey);
   font-family: var(--f-ui);
   font-size: 12px;

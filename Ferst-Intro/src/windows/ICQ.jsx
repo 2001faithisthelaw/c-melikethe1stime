@@ -1,5 +1,6 @@
 import Slot from '../components/Slot'
 import './ICQ.css'
+import { asset } from '../asset'
 
 const history = [
   { date: 'Vie 15/07 · 23:41', from: 'me',   text: 'estás?' },
@@ -69,7 +70,7 @@ export default function ICQ({ onClose, onMin }) {
             <div className="icq-attachment">
               <div className="icq-att-title">📎 recuerdo.mov</div>
               <Slot
-                dataSrc="/icq-recuerdo.mp4"
+                dataSrc={asset("/icq-recuerdo.mp4")}
                 label="ARCHIVO PROTEGIDO"
                 aspect="16 / 10"
               />

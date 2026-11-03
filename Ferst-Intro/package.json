@@ -1,6 +1,7 @@
 {
   "name": "y2k-landing",
   "private": true,
+  "description": "C-Me — like the 1st time. Interactive launch site for Illuno's debut album · Sitio interactivo del disco debut de Illuno.",
   "version": "0.1.0",
   "type": "module",
   "scripts": {
