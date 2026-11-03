@@ -62,7 +62,9 @@ video, img {
   image-rendering: -moz-crisp-edges;
 }
 .slot-media {
-  filter: contrast(1.08) saturate(0.88);
+  /* blur suave — escala apenas > 1 para que el borde no deje halo */
+  filter: blur(3px) contrast(1.08) saturate(0.88);
+  transform: scale(1.06);
 }
 
 .os-main {

@@ -4,7 +4,7 @@ Intro visual para el disco de **Illuno aka Ferst** · dirección **Fé**.
 
 Simulación de un escritorio de fines de los 90 / principios de los 2000 donde
 cada ventana orbita la misma ausencia. La aplicación principal se llama
-**C-Me — like the 1st time · welcome 2 our memories**: un servicio ficticio de
+**C-me 1 Last Time — welcome 2 our memories**: un servicio ficticio de
 webcams donde 9 usuarios transmiten, cada uno una fase de la misma obsesión.
 Desde ahí se abren, como diálogos flotantes, los chats de MSN, la búsqueda de
 donde_estas? (ex-LimeWire), y el visor de El Anuncio (clasificados).
@@ -51,7 +51,6 @@ src/
 ├─ main.jsx                  # entry — importa theme.css primero
 ├─ App.jsx                   # OS: CU-SeeMe fullscreen + ventanas flotantes + taskbar
 ├─ theme.css                 # ★ TOKENS CENTRALES (colores, fuentes, sizes)
-├─ asua.css                  # skin asua (default) + blur de feeds
 ├─ styles.css                # layout base del escritorio
 ├─ components/
 │   ├─ Slot.jsx              # motor drag&drop / click-to-browse (data-src auto)
@@ -84,16 +83,13 @@ Si un archivo no existe se muestra el overlay retro "SIN SEÑAL".
 Todo (colores, fuentes, tamaños, bordes, sombras) vive en `src/theme.css`.
 Cambiar tipografía en toda la plataforma = editar una línea.
 
-**Default: `asua`** — misma skin que asua-creative (`src/asua.css`): papel sage
-`#d7dcd6`, tinta `#031819`, rojo de anillo `#a3161b`, chrome biselado plano,
-Chemian para la marca "c-me", Special Elite para títulos y Arial 11px para la UI.
-Los feeds de video se muestran desenfocados (blur + scanlines) en todos los temas.
+**Default:** paleta cold-tech confessional (`#F4F4F4 / #0D0D0D / #8A8D91 /
+#E9E9E9 / #2F5FDB / #D42A2A`) + tipografía Silk Road (Georgia italic + Verdana).
 
-**Temas alternativos** cambiables en vivo desde el picker (`localStorage`
+**5 temas alternativos** cambiables en vivo desde el picker (`localStorage`
 persiste la elección):
 
-- `asua` — Chemian + Special Elite + Arial (default)
-- `silkroad` — Georgia italic + Verdana
+- `silkroad` — Georgia italic + Verdana (default)
 - `mssans` — todo MS Sans Serif 8×16
 - `dos` — todo Perfect DOS VGA 437
 - `w95fa` — todo W95FA
