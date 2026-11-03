@@ -5,7 +5,7 @@
   background: #08080c;
   color: #d6d6dd;
   font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 11px;
-  transition: opacity .9s ease;
+  transition: opacity .4s ease;
 }
 .intro.is-fade { opacity: 0; pointer-events: none; }
 .intro::after {                       /* scanlines suaves */
@@ -51,15 +51,7 @@
 }
 .intro-btn:active { box-shadow: inset 1px 1px 0 #7d7d86, inset -1px -1px 0 #f2f2f5; }
 .intro-btn:focus-visible { outline: 1px dotted #111; outline-offset: -4px; }
-.intro-out {
-  position: relative; z-index: 1; text-align: center; cursor: pointer;
-  font: italic 400 clamp(22px, 4.4vw, 38px)/1.35 Georgia, 'Times New Roman', serif;
-  color: #e4e4ec; letter-spacing: .03em; text-shadow: 0 0 14px rgba(190,200,255,.35);
-}
-.intro-out p { margin: 0; min-height: 1.35em; }
-.cur { opacity: .7; animation: intro-blink .8s steps(1) infinite; }
-@keyframes intro-blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
-  .intro-win, .cur { animation: none; }
+  .intro-win { animation: none; }
   .intro { transition: none; }
 }

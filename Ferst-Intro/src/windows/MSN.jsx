@@ -388,7 +388,7 @@ export default function MSN({
             {blocked ? 'cámara (denegada)' : `cam de ${contact}`}
           </div>
           {(blocked || contact === 'usuario_bloqueado') ? (
-            <BlockedCam />
+            <BlockedCam photo={asset('/blocks/fx.png')} />
           ) : (
             <Slot
               dataSrc={feedSrc}

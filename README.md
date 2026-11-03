@@ -12,14 +12,14 @@ Interactive launch site for **Illuno's** debut album. It simulates an early-2000
 
 ### What's in it
 
-- **Entry dialog.** The site opens with a confirmation box with three buttons that all say NO. Every one of them lets you in.
+- **Entry dialog.** The site opens with a confirmation box with three buttons that all say NO. Every one of them takes you straight into the site.
 - **C-Me (home).** A grid of nine "transmissions": eight videos and one refused connection. The videos are graded pale and washed out, with a soft light burst and blur that follow the face frame by frame.
 - **MSN chats.** Click a feed and a chat with that character opens. Each has its own conversation, and `@mentions` inside the logs open other chats.
 - **donde_estas?** A fake file-search window (a nod to LimeWire). Each file belongs to a character; double-click opens their chat.
 - **Deleted voice notes.** A player with the album's tracks.
 - **El Anuncio.** A classifieds page.
 - **Address bar.** Typing keywords such as `msn`, `busca`, `mp3` or `anuncio` opens the matching window.
-- **Blocked user.** Their cam box never loads; it shows text links over blurred photos that change block by block.
+- **Blocked user.** Their cam shows a single image, *f(x)*. Every other empty-signal box carries one hyperlink, "we will eventually find each other", over blurred photos that change block by block.
 
 Nothing is locked: everything is reachable from the start by following the cross-references between characters and files.
 
@@ -74,14 +74,14 @@ Sitio interactivo de lanzamiento del disco debut de **Illuno**. Simula un escrit
 
 ### Qué tiene
 
-- **Diálogo de entrada.** El sitio abre con una caja de confirmación con tres botones que dicen NO. Los tres te dejan entrar.
+- **Diálogo de entrada.** El sitio abre con una caja de confirmación con tres botones que dicen NO. Los tres te llevan directo al sitio.
 - **C-Me (home).** Una grilla de nueve "transmisiones": ocho videos y una conexión rechazada. Los videos tienen un color pálido y lavado, con un destello de luz y un blur suave que siguen la cara cuadro a cuadro.
 - **Chats de MSN.** Al hacer clic en una transmisión se abre el chat con ese personaje. Cada uno tiene su conversación, y las `@menciones` abren otros chats.
 - **donde_estas?** Una ventana falsa de búsqueda de archivos (guiño a LimeWire). Cada archivo es de un personaje; con doble clic se abre su chat.
 - **Notas de voz eliminadas.** Un reproductor con los temas del disco.
 - **El Anuncio.** Una página de clasificados.
 - **Barra de direcciones.** Escribir palabras como `msn`, `busca`, `mp3` o `anuncio` abre la ventana correspondiente.
-- **Usuario bloqueado.** Su cámara nunca carga: muestra links de texto sobre fotos desenfocadas que cambian de bloque en bloque.
+- **Usuario bloqueado.** Su cámara muestra una sola imagen, *f(x)*. Los demás recuadros sin señal llevan un hipervínculo, "we will eventually find each other", sobre fotos desenfocadas que cambian de bloque en bloque.
 
 Nada está bloqueado: todo se alcanza desde el principio siguiendo las referencias cruzadas entre personajes y archivos.
 
