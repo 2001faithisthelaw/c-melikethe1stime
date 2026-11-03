@@ -46,7 +46,7 @@ const feeds = [
     handle: 'usuario_bloqueado',
     name:   '— — —',
     title:  'CONEXIÓN FALLIDA',
-    sub:    'no se donde carajo te fuiste',
+    sub:    'no se donde te fuiste',
     views:  '0', ago: '—',
     fps: '00.0', kbps: '0', blocked: true,
   },
@@ -216,7 +216,7 @@ export default function CUSeeMe({ onOpen }) {
     '"porque yo sigo ahí en algún rincón · y no hay ficción."',
     '"es un círculo, no una espiral."',
     '"habitaciones infinitas dentro de una misma casa."',
-    '"welcome 2 ur last fucking chance!"',
+    '"welcome 2 our memories."',
     '"y no me contestás."',
     '"me digo muchas cosas · pero el tiempo sigue pasando."',
     '"lo dije primero · y sigo sosteniéndolo aunque no lo devuelvas."',
@@ -315,7 +315,7 @@ export default function CUSeeMe({ onOpen }) {
     else if (u.startsWith('donde://') || u.includes('busca')) onOpen('limewire')
     else if (u.includes('mp3') || u.includes('recording'))    onOpen('mp3')
     else if (u.includes('anuncio') || u.includes('classi'))   onOpen('ads')
-    else if (u.includes('salvacion') || u.includes('plug'))   onOpen('msn', { contact: 'salvacion_plug_24hs' })
+    else if (u.includes('salvacion'))   onOpen('msn', { contact: 'salvacion_24hs' })
     else if (u.includes('/fé') || u.includes('/fe'))          onOpen('msn', { contact: 'fé' })
   }
 
@@ -399,8 +399,8 @@ export default function CUSeeMe({ onOpen }) {
                 </div>
               ))}
               <div className="mm-drop-sep" />
-              <div className="mm-drop-item quiet" onClick={() => { openContact('salvacion_plug_24hs'); setHotOpen(false) }}>
-                <span className="mm-drop-icon">·</span><span>salvacion_plug_24hs</span>
+              <div className="mm-drop-item quiet" onClick={() => { openContact('salvacion_24hs'); setHotOpen(false) }}>
+                <span className="mm-drop-icon">·</span><span>salvacion_24hs</span>
               </div>
               <div className="mm-drop-item off">
                 <span className="mm-drop-icon">×</span><span>usuario_bloqueado (sin conexión)</span>
@@ -451,7 +451,7 @@ export default function CUSeeMe({ onOpen }) {
           <h1 className="cu-logo cu-logo-img">
             <img
               src="/logo.png"
-              alt="C-Me like the 1st time — welcome 2 ur last fucking chance!"
+              alt="C-Me like the 1st time — welcome 2 our memories"
               onError={(e) => {
                 /* Si el PNG no está, muestra fallback de texto */
                 e.currentTarget.style.display = 'none'
@@ -461,7 +461,7 @@ export default function CUSeeMe({ onOpen }) {
             />
             <span className="cu-logo-fallback" style={{ display: 'none' }}>
               C-Me <span className="cu-lasttime">like the 1st time</span>
-              <div className="cu-welcome-inline">welcome 2 ur last fucking chance!</div>
+              <div className="cu-welcome-inline">welcome 2 our memories</div>
             </span>
           </h1>
           {!playerHidden && (
