@@ -97,3 +97,49 @@
   [data-theme="silkroad"] .cu-feed:nth-child(3n+3) { animation-delay: .12s; }
 }
 @keyframes dd-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+/* ═══ Más apagado, más chico, menos bruto ═══ */
+/* menos color en todo el sitio (videos, íconos, acentos) */
+[data-theme="silkroad"] .os { filter: saturate(.45) contrast(.97); }
+
+/* escala: tipografía, barras y espacios más contenidos */
+[data-theme="silkroad"] .cu-page-inner { padding: 30px 20px 44px; max-width: 700px; }
+[data-theme="silkroad"] .cu-grid { max-width: 600px; gap: 12px; }
+[data-theme="silkroad"] .cu-logo-img { margin: -26px 0 -34px; }
+[data-theme="silkroad"] .cu-logo-img img { width: 92%; transform: translateX(-4%); }
+[data-theme="silkroad"] .cu-inline-player { max-width: 440px; margin-bottom: 18px; }
+[data-theme="silkroad"] .cu-feed-title { font-size: 13px; }
+[data-theme="silkroad"] .cu-feed-sub { font-size: 11px; }
+[data-theme="silkroad"] .cu-feed-loc { font-size: 10px; }
+[data-theme="silkroad"] .cu-feed-foot { font-size: 9px; padding: 3px 9px 7px; }
+[data-theme="silkroad"] .cu-feed-bar { padding: 3px 7px; font-size: 9px; }
+[data-theme="silkroad"] .cu-feed-meta { padding: 7px 9px 3px; }
+[data-theme="silkroad"] .cu-shortcuts { max-width: 600px; padding: 16px; margin-top: 32px; }
+[data-theme="silkroad"] .cu-shortcut-icon img { width: 40px; height: 40px; }
+[data-theme="silkroad"] .cu-shortcut-icon .mbm-png-lg { width: 48px; height: 48px; }
+[data-theme="silkroad"] .cu-shortcut-lbl { font-size: 13px; }
+
+[data-theme="silkroad"] .mosaic-titlebar,
+[data-theme="silkroad"] .msn-title,
+[data-theme="silkroad"] .lw-title,
+[data-theme="silkroad"] .ads-titlebar,
+[data-theme="silkroad"] .rpw-title { height: 24px; font-size: 11px; }
+[data-theme="silkroad"] .mc { height: 16px; width: 20px; font-size: 10px; }
+[data-theme="silkroad"] .mc-close { width: 26px; }
+[data-theme="silkroad"] .mosaic-menu { font-size: 11px; }
+[data-theme="silkroad"] .mm { padding: 4px 8px; font-size: 11px; }
+[data-theme="silkroad"] .mtb-btn { width: 24px; height: 22px; font-size: 11px; }
+[data-theme="silkroad"] .ma-input, [data-theme="silkroad"] .mtb-select { height: 22px; font-size: 11px; }
+[data-theme="silkroad"] .mbm-btn { font-size: 11px; }
+[data-theme="silkroad"] .os-main { bottom: 32px; }
+[data-theme="silkroad"] .os-taskbar { height: 32px; font-size: 11px; }
+[data-theme="silkroad"] .os-taskbtn, [data-theme="silkroad"] .os-start, [data-theme="silkroad"] .os-clock { font-size: 11px; }
+[data-theme="silkroad"] .msn-msg-text { font-size: 13px; }
+[data-theme="silkroad"] .tp { bottom: 38px; }
+
+/* menos brusco: bordes finos, sin sombras duras */
+[data-theme="silkroad"] .cuseeme-win,
+[data-theme="silkroad"] .win-frame > * { border-color: #b9b9c2; }
+[data-theme="silkroad"] .retro-player { box-shadow: 0 1px 6px rgba(30,30,50,.08); border-color: var(--dd-line); }
+[data-theme="silkroad"] .badge-live,
+[data-theme="silkroad"] .msn-live { border-radius: 2px; }

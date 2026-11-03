@@ -6,6 +6,7 @@ import Classifieds from './windows/Classifieds'
 import RetroPlayerWindow from './components/RetroPlayerWindow'
 import WindowFrame from './components/WindowFrame'
 import ThemePicker from './components/ThemePicker'
+import Intro from './components/Intro'
 
 const APPS = {
   msn:      { Component: MSN,               label: 'MSN Messenger', pos: { x: 120, y: 90  } },
@@ -15,6 +16,17 @@ const APPS = {
 }
 
 export default function App() {
+  // intro / captcha: una vez por sesión (agregá ?intro a la URL para verla de nuevo)
+  const [entered, setEntered] = useState(() => {
+    try {
+      if (new URLSearchParams(window.location.search).has('intro')) return false
+      return sessionStorage.getItem('cme-in') === '1'
+    } catch { return false }
+  })
+  const finishIntro = () => {
+    try { sessionStorage.setItem('cme-in', '1') } catch {}
+    setEntered(true)
+  }
   // wins: [{ id, app, props }]
   const [wins, setWins]       = useState([])
   const [minimized, setMin]   = useState({})
@@ -73,6 +85,7 @@ export default function App() {
 
   return (
     <div className="os">
+      {!entered && <Intro onDone={finishIntro} />}
       <div className="os-main">
         <CUSeeMe onOpen={openApp} />
       </div>
