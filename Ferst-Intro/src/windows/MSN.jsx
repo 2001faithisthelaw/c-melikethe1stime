@@ -117,7 +117,7 @@ const LOGS = {
     { t: '23:44', from: 'you',  text: 'acordate que yo lo dije primero' },
     { t: '23:45', from: 'sys',  text: '@fé lo dejó grabado por vos.' },
   ],
-  salvacion_24hs: [
+  salvacion_plug_24hs: [
     { t: '17:22', from: 'you',  text: 'podés a las 3?' },
     { t: '17:24', from: 'them', text: 'si flaca. comé algo antes' },
     { t: '17:25', from: 'you',  text: 'si' },
@@ -158,7 +158,7 @@ const MOODS = {
   'fé':                 'mi copa siempre va a estar llena mientras tenga fe',
   vox_record_001:       'última cosa que dijiste',
   't_amo_para_siempre': 'lo dije primero',
-  salvacion_24hs:  'kiosko de la esquina · 24 hs',
+  salvacion_plug_24hs:  'kiosko de la esquina · 24 hs',
   alguien_como_vos:     'buscándote en otras caras',
 }
 

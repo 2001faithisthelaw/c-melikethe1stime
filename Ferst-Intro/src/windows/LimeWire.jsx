@@ -114,12 +114,12 @@ const results = [
     opens:  { app: 'msn', props: { contact: 'fé' } },
   },
   {
-    name:   'salvacion_horarios_kiosko.txt',
+    name:   'salvacion_plug_horarios_kiosko.txt',
     size:   '1 KB', kbps: '—', q: 5, status: 'done',
-    author: 'salvacion_24hs',
+    author: 'salvacion_plug_24hs',
     notes:  'abierto 24hs · comé algo antes',
-    refs:   ['salvacion_24hs'],
-    opens:  { app: 'msn', props: { contact: 'salvacion_24hs' } },
+    refs:   ['salvacion_plug_24hs'],
+    opens:  { app: 'msn', props: { contact: 'salvacion_plug_24hs' } },
   },
   {
     name:   'el_anuncio.pdf',

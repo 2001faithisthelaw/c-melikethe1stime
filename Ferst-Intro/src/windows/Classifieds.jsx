@@ -112,7 +112,7 @@ export default function Classifieds({ onClose, onMin, onMax, isMaximized }) {
             <article className="ads-item">
               <p className="ads-lead">se ofrece</p>
               <p>
-                <em>salvacion_24hs</em>. Kiosko de la esquina abierto siempre.
+                <em>salvacion_plug_24hs</em>. Kiosko de la esquina abierto siempre.
                 Cada vez más barato. Conoce a mis hijos, se acuerda de mi nombre,
                 me pide que me cuide. La salvación no dura para siempre.
               </p>
