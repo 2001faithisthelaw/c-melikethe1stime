@@ -74,6 +74,20 @@ The repo includes a root [`vercel.json`](vercel.json), so it imports as is.
 
 From the terminal, with the built site: `cd Ferst-Intro && npm run build && cd dist && npx vercel --prod`.
 
+### Likes and messages
+
+Visitors can leave a ♡ on each character and send messages in the chats. Nothing is loaded back into the page: messages are stored apart and only you can read them.
+
+- **Likes:** one per browser per character. Counts show next to the chat header.
+- **Messages:** saved with an approximate location (country / region / city) and an anonymous code for the connection, which lets you spot repeat senders without storing IPs. Storing the full IP is off by default (`STORE_RAW_IP=1` turns it on); if you enable it, tell visitors. The chat already shows a short notice.
+- **Favorites:** every message gets a simple composition score (length, punctuation, repeated letters, ALL CAPS, links, insults). Those above 70 become favorites on their own, and you can star or unstar any message by hand. It is a heuristic, not an AI judge.
+- **Private panel:** `/admin.html` lists the messages (newest first) with place, time, connection code and score. It asks for `ADMIN_TOKEN`.
+- **Needs a server:** it runs as Vercel functions (`api/`) with Upstash Redis. On GitHub Pages the buttons simply do not appear, unless you point `VITE_API_BASE` at your Vercel address.
+
+Setup on Vercel: **Storage → Marketplace → Upstash Redis → Connect to project**, then add `ADMIN_TOKEN` and `IP_SALT` under **Settings → Environment Variables** (see [`.env.example`](.env.example)) and redeploy.
+
+Local test: `node --test tests/api.test.cjs tests/upstash.test.cjs`. To try it in the browser, run `node Ferst-Intro/tools/dev-api.mjs` next to `npm run dev` (panel token: `dev`).
+
 ### Regenerate the videos
 
 The videos in `Ferst-Intro/public/` are processed from the originals in `Ferst-Intro/media-src/`, which the site does not serve.
@@ -151,6 +165,20 @@ El repo trae un [`vercel.json`](vercel.json) en la raíz, así que se importa ta
 2. Dejá todo como está y tocá **Deploy**. Vercel te da un link público `*.vercel.app`.
 
 Desde la terminal, con el sitio ya armado: `cd Ferst-Intro && npm run build && cd dist && npx vercel --prod`.
+
+### Likes y mensajes
+
+Los visitantes pueden dejar un ♡ en cada personaje y mandar mensajes en los chats. Nada se vuelve a cargar en la página: los mensajes se guardan aparte y solo vos podés leerlos.
+
+- **Likes:** uno por navegador y por personaje. El número aparece junto a la cabecera del chat.
+- **Mensajes:** se guardan con una ubicación aproximada (país / región / ciudad) y un código anónimo de la conexión, que sirve para detectar a quien escribe seguido sin guardar IPs. Guardar la IP completa está apagado por defecto (`STORE_RAW_IP=1` lo activa); si lo activás, avisá a los visitantes. El chat ya muestra un aviso corto.
+- **Favoritos:** cada mensaje recibe un puntaje simple de composición (largo, puntuación, letras repetidas, MAYÚSCULAS, links, insultos). Los que pasan de 70 entran solos a favoritos, y podés marcar o desmarcar cualquiera con la estrella. Es una heurística, no una IA que juzga.
+- **Panel privado:** `/admin.html` lista los mensajes (los nuevos primero) con lugar, hora, código de conexión y puntaje. Pide el `ADMIN_TOKEN`.
+- **Necesita servidor:** funciona como funciones de Vercel (`api/`) con Upstash Redis. En GitHub Pages los botones simplemente no aparecen, salvo que apuntes `VITE_API_BASE` a tu dirección de Vercel.
+
+Puesta en marcha en Vercel: **Storage → Marketplace → Upstash Redis → Connect to project**, después agregá `ADMIN_TOKEN` e `IP_SALT` en **Settings → Environment Variables** (ver [`.env.example`](.env.example)) y volvé a publicar.
+
+Prueba local: `node --test tests/api.test.cjs tests/upstash.test.cjs`. Para probarlo en el navegador, corré `node Ferst-Intro/tools/dev-api.mjs` junto con `npm run dev` (token del panel: `dev`).
 
 ### Regenerar los videos
 

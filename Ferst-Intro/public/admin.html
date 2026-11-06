@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>C-Me · panel</title>
+<style>
+  :root { --ink:#2b2b33; --soft:#7c7c88; --line:#cfcfd6; --pale:#f1f1f4; --red:#a3161b; --blue:#1f3fc4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 20px 16px 60px; background: var(--pale); color: var(--ink); font: 13px/1.4 'Times New Roman', Times, serif; }
+  main { max-width: 980px; margin: 0 auto; }
+  h1 { font: italic 400 22px 'Times New Roman', serif; margin: 0 0 4px; }
+  .sub { color: var(--soft); margin: 0 0 14px; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+  input, button { font: 13px Arial, sans-serif; padding: 5px 9px; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 2px; }
+  button { cursor: pointer; } button:hover { border-color: var(--ink); }
+  .bar button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .stats { color: var(--soft); font: 12px Arial, sans-serif; margin: 0 0 12px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 2px; padding: 10px 12px; margin-bottom: 8px; display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; }
+  .card.fav { border-left: 3px solid var(--red); }
+  .txt { font-size: 15px; white-space: pre-wrap; word-break: break-word; }
+  .meta { grid-column: 1 / -1; color: var(--soft); font: 11px Arial, sans-serif; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .score { font: 700 12px Arial, sans-serif; text-align: right; color: var(--soft); }
+  .star { font-size: 18px; line-height: 1; padding: 2px 8px; color: var(--soft); }
+  .star.on { color: var(--red); border-color: var(--red); }
+  .err { color: var(--red); margin: 8px 0; }
+  .empty { color: var(--soft); font-style: italic; padding: 20px 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>C-Me · mensajes y likes</h1>
+  <p class="sub">Panel privado. Los mensajes se guardan con ubicación aproximada y un código anónimo de la conexión; acá no hay nada público.</p>
+  <div class="bar">
+    <input id="tok" type="password" placeholder="ADMIN_TOKEN" autocomplete="off">
+    <button id="go">entrar</button>
+    <button id="all" class="on">todos</button>
+    <button id="favs">★ favoritos</button>
+    <button id="refresh">actualizar</button>
+  </div>
+  <p class="stats" id="stats"></p>
+  <p class="err" id="err" role="alert"></p>
+  <div id="list"></div>
+</main>
+<script>
+  const $ = (id) => document.getElementById(id)
+  let onlyFav = false
+  const tokStore = { get: () => { try { return sessionStorage.getItem('cme-admin') || '' } catch { return '' } },
+                     set: (v) => { try { sessionStorage.setItem('cme-admin', v) } catch {} } }
+  $('tok').value = tokStore.get()
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
+  const hdr = () => ({ Authorization: 'Bearer ' + tokStore.get(), 'Content-Type': 'application/json' })
+
+  async function load() {
+    $('err').textContent = ''
+    const r = await fetch('/api/admin?limit=200' + (onlyFav ? '&fav=1' : ''), { headers: hdr() }).catch(() => null)
+    if (!r) { $('err').textContent = 'No pude conectar con el servidor.'; return }
+    const d = await r.json().catch(() => ({}))
+    if (!r.ok) { $('err').textContent = d.error || ('Error ' + r.status); $('list').innerHTML = ''; $('stats').textContent = ''; return }
+    const total = Object.values(d.counts).reduce((a, b) => a + Number(b), 0)
+    const likes = Object.entries(d.likes).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([k, v]) => `${esc(k)} ♥${v}`).join(' · ')
+    $('stats').innerHTML = `${total} mensajes · ${d.favTotal} favoritos · almacenamiento: ${esc(d.store)}${likes ? ' · más likes: ' + likes : ''}`
+    $('list').innerHTML = d.comments.length ? d.comments.map((c) => `
+      <div class="card ${c.fav ? 'fav' : ''}">
+        <div class="txt">${esc(c.text)}</div>
+        <div><button class="star ${c.fav ? 'on' : ''}" data-id="${esc(c.id)}" data-fav="${c.fav ? 0 : 1}" title="favorito">${c.fav ? '★' : '☆'}</button><div class="score">${c.score}${c.auto ? ' · auto' : ''}</div></div>
+        <div class="meta">
+          <span>→ ${esc(c.contact)}</span>
+          <span>${new Date(c.t).toLocaleString()}</span>
+          <span>${esc([c.city, c.region, c.country].filter(Boolean).join(', ') || 'ubicación desconocida')}</span>
+          <span>conexión ${esc(c.ipHash)}</span>
+          ${c.ip ? `<span>IP ${esc(c.ip)}</span>` : ''}
+          <span>navegador ${esc((c.visitor || '').slice(0, 8))}</span>
+          <span title="${esc(c.ua)}">${esc((c.ua || '').slice(0, 40))}</span>
+        </div>
+      </div>`).join('') : '<p class="empty">todavía no hay mensajes.</p>'
+  }
+  $('list').addEventListener('click', async (e) => {
+    const b = e.target.closest('.star'); if (!b) return
+    await fetch('/api/admin', { method: 'POST', headers: hdr(), body: JSON.stringify({ id: b.dataset.id, fav: b.dataset.fav === '1' }) })
+    load()
+  })
+  $('go').onclick = () => { tokStore.set($('tok').value.trim()); load() }
+  $('tok').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('go').click() })
+  $('refresh').onclick = load
+  $('all').onclick = () => { onlyFav = false; $('all').classList.add('on'); $('favs').classList.remove('on'); load() }
+  $('favs').onclick = () => { onlyFav = true; $('favs').classList.add('on'); $('all').classList.remove('on'); load() }
+  if (tokStore.get()) load()
+</script>
+</body>
+</html>
