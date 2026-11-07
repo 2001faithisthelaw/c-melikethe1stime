@@ -1,8 +1,9 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Slot from '../components/Slot'
 import BlockedCam from '../components/BlockedCam'
 import './MSN.css'
 import { asset } from '../asset'
+import { getLikes, toggleLike, sendComment } from '../lib/feedback'
 
 /* ─── Historias específicas por contacto ─── */
 /*  Nota: cualquier @usuario dentro de text se renderiza como enlace clickeable
@@ -239,7 +240,18 @@ export default function MSN({
 }) {
   const [draft, setDraft] = useState('')
   const [sent, setSent]   = useState([])
+  const [likes, setLikes]   = useState(null)   // null = sin servidor → no se muestra el botón
   const textareaRef = useRef(null)
+
+  useEffect(() => {
+    let alive = true
+    getLikes(contact).then(r => { if (alive && r) setLikes(r) })
+    return () => { alive = false }
+  }, [contact])
+  const like = async () => {
+    const r = await toggleLike(contact)
+    if (r) setLikes(r)
+  }
   const chatLog = useMemo(
     () => LOGS[contact] || fallbackLog(contact, blocked),
     [contact, blocked]
@@ -295,6 +307,7 @@ export default function MSN({
     if (e) e.preventDefault()
     if (!draft.trim() || blocked) return
     setSent([...sent, { t: now(), text: draft }])
+    sendComment(contact, draft)   // se guarda aparte; la página no vuelve a cargarlo
     setDraft('')
     requestAnimationFrame(() => textareaRef.current?.focus())
   }
@@ -349,6 +362,15 @@ export default function MSN({
             {displayName && <span className="msn-loc"> · {displayName}</span>}
           </div>
         </div>
+        {likes && (
+          <button
+            type="button"
+            className={`msn-like ${likes.liked ? 'on' : ''}`}
+            onClick={like}
+            aria-pressed={likes.liked}
+            title={likes.liked ? 'sacar el like' : 'dejar un like'}
+          >{likes.liked ? '♥' : '♡'} <span>{likes.count}</span></button>
+        )}
         <div className={`msn-presence ${blocked ? 'off' : 'on'}`}>
           {blocked ? 'bloqueado' : 'live now'}
         </div>
@@ -438,6 +460,7 @@ export default function MSN({
         />
         <button type="submit" className="msn-send" disabled={blocked}>enviar</button>
       </form>
+      {likes && <p className="msn-privacy">los mensajes se guardan con tu ubicación aproximada.</p>}
 
       <footer className="msn-status">
         <span>última actividad: hace 6 horas</span>
